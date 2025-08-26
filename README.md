@@ -106,8 +106,6 @@ window.addEventListener('presentation:ready', (e) => {
   console.log('Ready', e.detail);
 });
 ```
-```
-
 ## 🛠️ Development Scripts
 
 ```bash
