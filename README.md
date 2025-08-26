@@ -324,10 +324,7 @@ See [PRD.md](docs/PRD.md) for detailed roadmap.
 
 ## 📖 Documentation
 
-- **[Product Requirements](docs/PRD.md)** - Complete development roadmap
-- **[Architecture Guide](docs/architecture.md)** - System design details
-- **[Theme Development](docs/theme-development.md)** - Custom theme creation
-- **[Component Library](docs/component-library.md)** - Available components
+- **Component Library (Coming Soon)** - Available components
 
 ## ⚡ Performance
 
