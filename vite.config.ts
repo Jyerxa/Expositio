@@ -79,17 +79,12 @@ export default defineConfig(({ command }) => ({
   // Plugins
   plugins: [
     dts({
-      include: ['src/**/*'],
+      include: ['src/**/*', 'types/**/*'],
       exclude: ['**/*.test.ts', '**/*.spec.ts'],
       rollupTypes: true
-    }),
-    ...(command === 'build'
-      ? [
-        legacy({
-          targets: ['defaults', 'not IE 11']
-        })
-      ]
-      : [])
+    })
+    // Note: @vitejs/plugin-legacy is not compatible with library mode
+    // Legacy browser support should be handled by the consumer application
   ],
 
   // Path resolution
