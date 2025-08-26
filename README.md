@@ -1,6 +1,6 @@
 # Expositio - Professional Presentation Template System
 
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](package.json)
+[![Version](https://img.shields.io/npm/v/expositio.svg?style=flat&color=blue)](https://github.com/<owner>/<repo>/releases)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3+-blue.svg)](https://typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-5.1+-646CFF.svg)](https://vitejs.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
