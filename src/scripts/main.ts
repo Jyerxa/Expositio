@@ -2,7 +2,7 @@
  * Professional Presentation Template System
  * Main TypeScript Entry Point
  * 
- * @version 2.0.0
+ * @version 3.0.0
  * @author Professional Presentation Template
  */
 
@@ -34,7 +34,7 @@ import Search from 'reveal.js/plugin/search/search.esm.js';
 import 'reveal.js/dist/reveal.css';
 
 // Global constants
-const VERSION: string = (typeof __VERSION__ !== 'undefined' && __VERSION__) || '2.0.0';
+const VERSION: string = (typeof __VERSION__ !== 'undefined' && __VERSION__) || '3.0.0';
 const IS_DEV: boolean = typeof __DEV__ !== 'undefined' ? __DEV__ : false;
 
 // Logger utility
@@ -141,7 +141,7 @@ class PresentationTemplate {
       logger.info('Presentation initialization complete');
 
       // Emit ready event
-      this.emit('presentationReady', {
+      this.emit('ready', {
         version: VERSION,
         config: this.config,
         metrics: this.performanceMetrics
@@ -323,7 +323,7 @@ class PresentationTemplate {
     this.reveal.on('slidechanged', (event: { previousSlide: Element; currentSlide: Element; indexh: number; indexv: number }) => {
       logger.info(`Slide changed to: ${event.indexh}.${event.indexv}`);
 
-      this.emit('slideChanged', {
+      this.emit('slide-changed', {
         previousSlide: event.previousSlide,
         currentSlide: event.currentSlide,
         indexh: event.indexh,
@@ -334,12 +334,12 @@ class PresentationTemplate {
     // Fragment events
     this.reveal.on('fragmentshown', (event: { fragment: Element }) => {
       logger.info('Fragment shown');
-      this.emit('fragmentShown', { fragment: event.fragment });
+      this.emit('fragment-shown', { fragment: event.fragment });
     });
 
     this.reveal.on('fragmenthidden', (event: { fragment: Element }) => {
       logger.info('Fragment hidden');
-      this.emit('fragmentHidden', { fragment: event.fragment });
+      this.emit('fragment-hidden', { fragment: event.fragment });
     });
   }
 
@@ -453,8 +453,8 @@ function getConfigFromDOM(): Partial<PresentationConfig> {
   return config;
 }
 
-// Auto-initialize if not in module context
-if (typeof window !== 'undefined' && !window.module) {
+// Auto-initialize by default; allow opt-out with window.EXPOSITIO_AUTO_INIT === false
+if (typeof window !== 'undefined' && (window as any).EXPOSITIO_AUTO_INIT !== false) {
   autoInitialize();
 }
 

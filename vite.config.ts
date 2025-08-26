@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import legacy from '@vitejs/plugin-legacy';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig(({ command }) => ({
@@ -92,11 +91,7 @@ export default defineConfig(({ command }) => ({
     alias: {
       '@': resolve(__dirname, 'src'),
       '@styles': resolve(__dirname, 'src/styles'),
-      '@scripts': resolve(__dirname, 'src/scripts'),
-      '@templates': resolve(__dirname, 'src/templates'),
-      '@assets': resolve(__dirname, 'src/assets'),
-      '@docs': resolve(__dirname, 'docs'),
-      '@examples': resolve(__dirname, 'examples')
+      '@scripts': resolve(__dirname, 'src/scripts')
     }
   },
 
