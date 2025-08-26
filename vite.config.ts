@@ -84,12 +84,12 @@ export default defineConfig(({ command }) => ({
       rollupTypes: true
     }),
     ...(command === 'build'
-      ? []
-      : [
+      ? [
         legacy({
           targets: ['defaults', 'not IE 11']
         })
-      ])
+      ]
+      : [])
   ],
 
   // Path resolution
