@@ -1,0 +1,32 @@
+{
+  "name": "html-presentation",
+  "version": "1.0.0",
+  "description": "HTML presentation using Reveal.js",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8080 -o",
+    "serve": "npx http-server . -p 8080",
+    "build": "echo 'Nothing to build - static HTML presentation'",
+    "preview": "npx http-server . -p 3000 -o",
+    "test": "npx playwright test",
+    "test:headed": "HEADED=true npx playwright test --headed",
+    "test:visual": "npx playwright test visual-capture.spec.js",
+    "test:interactive": "HEADED=true npx playwright test --headed --timeout=0",
+    "test:debug": "npx playwright test --debug",
+    "test:report": "npx playwright show-report",
+    "test:capture": "npx playwright test visual-capture.spec.js --project=chromium"
+  },
+  "keywords": [
+    "presentation",
+    "reveal.js",
+    "slides",
+    "html"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "http-server": "^14.1.1",
+    "playwright": "^1.55.0"
+  }
+}

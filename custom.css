@@ -1,0 +1,612 @@
+/* Futuristic Starship Bridge - Elegant Minimalist Presentation Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Root variables for consistent theming - Calmer, more refined palette */
+:root {
+    --primary-cyan: #4dd0e1;
+    --primary-blue: #42a5f5;
+    --accent-teal: #4db6ac;
+    --accent-purple: #9575cd;
+    --dark-bg: #0a0f1c;
+    --darker-bg: #050911;
+    --surface: rgba(20, 30, 50, 0.4);
+    --surface-light: rgba(20, 30, 50, 0.6);
+    --text-primary: #ecf2ff;
+    --text-secondary: #b8c9e0;
+    --text-muted: #8fa8c7;
+    --glow-primary: 0 0 12px rgba(77, 208, 225, 0.2);
+    --glow-secondary: 0 0 8px rgba(77, 182, 172, 0.15);
+    --border-glow: rgba(77, 208, 225, 0.25);
+    --content-max-width: 900px;
+}
+
+/* Base body styling with starfield effect */
+.reveal {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(ellipse at center, #0f1929 0%, #050810 100%);
+    color: var(--text-primary);
+}
+
+.reveal::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(1px 1px at 25px 35px, rgba(77, 208, 225, 0.15), transparent),
+        radial-gradient(1px 1px at 50px 80px, rgba(77, 182, 172, 0.12), transparent),
+        radial-gradient(1px 1px at 95px 45px, rgba(149, 117, 205, 0.1), transparent),
+        radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.05), transparent),
+        radial-gradient(1px 1px at 170px 35px, rgba(77, 208, 225, 0.1), transparent);
+    background-repeat: repeat;
+    background-size: 220px 220px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Typography with improved spacing and readability */
+.reveal .slides {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+}
+
+.reveal h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.8rem, min(4.5vw, 8vh), 2.8em);
+    font-weight: 600;
+    color: var(--text-primary);
+    text-shadow: var(--glow-primary);
+    letter-spacing: 1.5px;
+    margin-bottom: min(0.8em, 2vh);
+    line-height: 1.2;
+    word-spacing: 0.2em;
+}
+
+.reveal h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, min(3.5vw, 6vh), 2.1em);
+    font-weight: 500;
+    color: var(--primary-cyan);
+    text-shadow: var(--glow-primary);
+    letter-spacing: 0.8px;
+    margin-bottom: min(1.2em, 3vh);
+    line-height: 1.3;
+    word-spacing: 0.15em;
+}
+
+.reveal h3 {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.2rem, min(2.5vw, 4vh), 1.5em);
+    font-weight: 400;
+    color: var(--accent-teal);
+    text-shadow: var(--glow-secondary);
+    letter-spacing: 0.3px;
+    margin-bottom: min(1em, 2vh);
+    line-height: 1.4;
+}
+
+.reveal p {
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-size: clamp(0.9rem, min(2vw, 3vh), 1.05em);
+    margin-bottom: min(1.2em, 2vh);
+    max-width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reveal li {
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-size: clamp(0.9rem, min(2vw, 3vh), 1.05em);
+    margin-bottom: min(0.8em, 1.5vh);
+}
+
+.reveal small {
+    font-size: 0.7em;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+/* Two column layout with improved spacing */
+.columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: min(2.5rem, 4vw);
+    max-width: 100%;
+    margin: min(2rem, 3vh) auto;
+}
+
+.column {
+    flex: 1;
+    text-align: left;
+    background: var(--surface);
+    border: 1px solid rgba(77, 208, 225, 0.2);
+    border-radius: 16px;
+    padding: min(2.5rem, 4vh) min(2rem, 3vw);
+    backdrop-filter: blur(12px);
+    box-shadow: 
+        var(--glow-primary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    min-height: min(200px, 25vh);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.column:hover {
+    border-color: var(--border-glow);
+    box-shadow: 
+        0 0 20px rgba(77, 208, 225, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+}
+
+.column h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+}
+
+.column p {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-grow: 1;
+}
+
+/* Refined blockquotes for better readability */
+.reveal blockquote {
+    font-style: italic;
+    width: 80%;
+    margin: min(3rem, 4vh) auto;
+    padding: min(2.5rem, 3vh) min(2rem, 3vw);
+    background: rgba(77, 208, 225, 0.03);
+    border: 1px solid rgba(77, 208, 225, 0.2);
+    border-left: 3px solid var(--primary-cyan);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 
+        var(--glow-primary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+    font-size: clamp(1rem, min(2.2vw, 3.5vh), 1.15em);
+    line-height: 1.8;
+}
+
+.reveal blockquote::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+    animation: shimmer 4s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes shimmer {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+/* Improved list styling with better spacing */
+.reveal ul {
+    max-width: 80%;
+    margin: min(2rem, 3vh) auto;
+}
+
+.reveal ul li {
+    margin-bottom: min(1rem, 1.5vh);
+    padding-left: min(1.5rem, 2vw);
+    position: relative;
+    line-height: 1.7;
+}
+
+.reveal ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-cyan);
+    text-shadow: var(--glow-secondary);
+    font-size: 0.9em;
+    top: 0.1em;
+}
+
+/* Improved code blocks with better spacing */
+.reveal pre {
+    background: rgba(8, 12, 20, 0.85);
+    border: 1px solid rgba(77, 182, 172, 0.25);
+    border-radius: 16px;
+    box-shadow: 
+        var(--glow-secondary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    width: 90%;
+    margin: min(2rem, 3vh) auto;
+    font-size: clamp(0.7em, 1.8vh, 0.9em);
+    position: relative;
+    overflow: hidden;
+}
+
+.reveal pre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-teal), var(--primary-cyan), var(--accent-teal));
+    opacity: 0.8;
+}
+
+.reveal pre code {
+    padding: min(2rem, 3vh) min(2.5rem, 3vw);
+    max-height: min(450px, 40vh);
+    font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+    background: transparent;
+    line-height: 1.6;
+    font-size: clamp(0.7rem, min(1.5vw, 2vh), inherit);
+}
+
+/* Holographic image styling */
+.reveal section img {
+    max-width: min(100%, 90vw);
+    max-height: min(300px, 30vh);
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 
+        var(--glow-primary),
+        0 10px 40px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.reveal section img:hover {
+    border-color: var(--border-glow);
+    box-shadow: 
+        0 0 40px rgba(0, 212, 255, 0.5),
+        0 10px 40px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02);
+}
+
+/* Smooth fragment animations */
+.reveal .slides section .fragment {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(20px);
+}
+
+.reveal .slides section .fragment.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Refined progress bar */
+.reveal .progress {
+    color: var(--primary-cyan);
+    background: rgba(77, 208, 225, 0.08);
+    height: 3px;
+}
+
+.reveal .progress span {
+    background: linear-gradient(90deg, var(--primary-cyan), var(--accent-teal));
+    box-shadow: 0 0 6px rgba(77, 208, 225, 0.3);
+}
+
+/* Refined control arrows */
+.reveal .controls {
+    color: var(--primary-cyan);
+    filter: drop-shadow(0 0 5px rgba(77, 208, 225, 0.3));
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.reveal .controls:hover {
+    opacity: 1;
+}
+
+.reveal .controls button {
+    transition: all 0.3s ease;
+    border: none;
+    background: none;
+    color: inherit;
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+
+.reveal .controls button:hover {
+    filter: drop-shadow(0 0 8px rgba(77, 208, 225, 0.6));
+    transform: scale(1.1);
+}
+
+/* Refined slide numbers */
+.reveal .slide-number {
+    color: var(--text-primary);
+    background: var(--surface);
+    border: 1px solid rgba(77, 208, 225, 0.2);
+    padding: 6px 10px;
+    border-radius: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    backdrop-filter: blur(15px);
+    box-shadow: var(--glow-secondary);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.reveal .slide-number:hover {
+    opacity: 1;
+}
+
+/* Speaker notes styling */
+.reveal .speaker-notes {
+    border-top: 2px solid var(--primary-cyan);
+    background: var(--darker-bg);
+    color: var(--text-secondary);
+}
+
+/* Holographic tables */
+.reveal table {
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--surface);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    box-shadow: var(--glow-primary);
+}
+
+.reveal table th {
+    font-family: 'Orbitron', monospace;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+    color: var(--text-primary);
+    padding: 1rem 1.5rem;
+    text-shadow: var(--glow-primary);
+    letter-spacing: 0.5px;
+}
+
+.reveal table td {
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+    background: rgba(15, 25, 45, 0.3);
+    color: var(--text-secondary);
+}
+
+.reveal table tr:hover td {
+    background: rgba(0, 212, 255, 0.05);
+    color: var(--text-primary);
+}
+
+/* Enhanced slide spacing and layout */
+.reveal .slides section {
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.reveal .slides section.present {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    max-height: 100vh;
+    text-align: center;
+    padding: min(2rem, 3vh) min(2rem, 3vw);
+    box-sizing: border-box;
+    container-type: size;
+}
+
+/* Better vertical rhythm with viewport scaling */
+.reveal .slides section > * + * {
+    margin-top: min(1.5rem, 2vh);
+}
+
+.reveal .slides section > h1 + * {
+    margin-top: min(2rem, 3vh);
+}
+
+.reveal .slides section > h2 + * {
+    margin-top: min(1.8rem, 2.5vh);
+}
+
+/* Responsive adjustments with improved spacing */
+@media (max-width: 768px) {
+    :root {
+        --content-max-width: 95%;
+    }
+    
+    .columns {
+        flex-direction: column;
+        gap: 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    .column {
+        padding: 2rem 1.5rem;
+        min-height: auto;
+    }
+    
+    .reveal h1 {
+        font-size: 2.2em;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+    
+    .reveal h2 {
+        font-size: 1.8em;
+        letter-spacing: 0.5px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .reveal h3 {
+        font-size: 1.3em;
+    }
+    
+    .reveal p {
+        font-size: 1rem;
+        max-width: 95%;
+    }
+    
+    .reveal ul {
+        max-width: 95%;
+    }
+    
+    .reveal pre {
+        width: 95%;
+        font-size: 0.8em;
+    }
+    
+    .reveal pre code {
+        padding: 1.5rem;
+    }
+}
+
+/* Accessibility improvements */
+.reveal button:focus,
+.reveal a:focus {
+    outline: 2px solid var(--primary-cyan);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.reveal .slides section[aria-hidden="true"] {
+    pointer-events: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-cyan: #00e6ff;
+        --text-primary: #ffffff;
+        --text-secondary: #e0e0e0;
+        --surface: rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .reveal .slides section .fragment {
+        transition: none;
+    }
+    
+    .column {
+        transition: none;
+    }
+    
+    .reveal .controls button {
+        transition: none;
+    }
+    
+    @keyframes shimmer {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 0.7; }
+    }
+}
+
+/* Dark mode preference (already dark, but ensuring consistency) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --text-primary: #f0f6ff;
+        --text-secondary: #c0d0e8;
+    }
+}
+
+/* Zoom resilience - handle high zoom levels and small viewports */
+@media screen and (max-height: 600px), screen and (min-resolution: 150dpi) {
+    .reveal .slides section.present {
+        justify-content: flex-start;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    
+    .reveal h1 {
+        font-size: clamp(1.5rem, 4vw, 2.2em);
+        margin-bottom: 0.5em;
+    }
+    
+    .reveal h2 {
+        font-size: clamp(1.2rem, 3vw, 1.8em);
+        margin-bottom: 0.8em;
+    }
+    
+    .reveal .slides section > * + * {
+        margin-top: 1rem;
+    }
+}
+
+/* Very high zoom levels or very small screens */
+@media screen and (max-height: 400px) {
+    .reveal .slides section.present {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+    }
+    
+    .reveal h1 {
+        font-size: clamp(1.2rem, 3.5vw, 1.8em);
+        margin-bottom: 0.3em;
+    }
+    
+    .reveal h2 {
+        font-size: clamp(1rem, 3vw, 1.5em);
+        margin-bottom: 0.5em;
+    }
+    
+    .reveal p {
+        font-size: clamp(0.8rem, 1.8vw, 0.95em);
+        margin-bottom: 0.8em;
+    }
+    
+    .reveal .slides section > * + * {
+        margin-top: 0.5rem;
+    }
+}
+
+/* Chart container styling for responsive charts */
+.chart-container {
+    position: relative;
+    width: min(90%, 600px);
+    height: min(300px, 25vh);
+    margin: min(2rem, 3vh) auto;
+    background: rgba(8, 12, 20, 0.85);
+    border: 1px solid rgba(77, 182, 172, 0.25);
+    border-radius: 16px;
+    padding: min(1.5rem, 2vh);
+    backdrop-filter: blur(12px);
+    box-shadow: 
+        var(--glow-secondary),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.chart-container canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* Print styles */
+@media print {
+    .reveal .controls,
+    .reveal .progress {
+        display: none !important;
+    }
+    
+    .reveal::before {
+        display: none;
+    }
+    
+    .reveal .slides section {
+        page-break-inside: avoid;
+        page-break-after: auto;
+    }
+}
