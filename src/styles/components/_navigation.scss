@@ -1,0 +1,519 @@
+// Navigation and Controls Components
+// Professional Presentation Template System
+
+// Progress bar
+.reveal .progress {
+  color: var(--primary-cyan);
+  background: rgba(77, 208, 225, 0.08);
+  height: 3px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-index-fixed);
+  
+  span {
+    background: linear-gradient(90deg, var(--primary-cyan), var(--accent-teal));
+    @include glow(#4dd0e1, 0.3, 6px);
+    height: 100%;
+    display: block;
+    @include animate(width, var(--transition-base));
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      right: -2px;
+      width: 4px;
+      height: 5px;
+      background: var(--primary-cyan);
+      border-radius: 2px;
+      @include glow(#4dd0e1, 0.5, 4px);
+    }
+  }
+}
+
+// Navigation controls
+.reveal .controls {
+  color: var(--primary-cyan);
+  filter: drop-shadow(0 0 5px rgba(77, 208, 225, 0.3));
+  opacity: 0.7;
+  @include animate(opacity, var(--transition-base));
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: var(--z-index-fixed);
+  
+  @include hover-focus {
+    opacity: 1;
+  }
+  
+  button {
+    @include button-reset;
+    @include animate(all, var(--transition-base));
+    border: none;
+    background: var(--surface);
+    color: var(--primary-cyan);
+    font-size: 1.2em;
+    padding: 0.75em;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    @include flex-center;
+    border: 1px solid var(--border-base);
+    @include glow(#4dd0e1, 0.15, 8px);
+    
+    @include hover-focus {
+      filter: drop-shadow(0 0 8px rgba(77, 208, 225, 0.6));
+      transform: scale(1.1);
+      border-color: var(--border-glow);
+      background: var(--surface-hover);
+    }
+    
+    @include active {
+      transform: scale(1.05);
+    }
+    
+    &:focus-visible {
+      @include focus-ring(var(--primary-cyan), 2px, 2px);
+    }
+    
+    // Arrow directions
+    &.navigate-left::before {
+      content: '◀';
+    }
+    
+    &.navigate-right::before {
+      content: '▶';
+    }
+    
+    &.navigate-up::before {
+      content: '▲';
+    }
+    
+    &.navigate-down::before {
+      content: '▼';
+    }
+  }
+}
+
+// Custom navigation arrows (enhanced)
+.reveal .controls-arrow {
+  position: absolute;
+  opacity: 0.6;
+  @include animate(all, var(--transition-base));
+  
+  &::before {
+    font-size: 1.5rem;
+    color: var(--primary-cyan);
+    text-shadow: var(--glow-primary);
+  }
+  
+  @include hover-focus {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+  
+  &.enabled {
+    opacity: 0.8;
+    
+    @include hover-focus {
+      opacity: 1;
+    }
+  }
+  
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+// Slide numbers
+.reveal .slide-number {
+  color: var(--text-primary);
+  background: var(--surface);
+  border: 1px solid var(--border-base);
+  padding: 6px 10px;
+  border-radius: var(--border-radius);
+  font-family: var(--font-family-body);
+  font-size: 10px;
+  font-weight: var(--font-weight-medium);
+  @include glass-effect(0.4, 15px);
+  @include glow(#4db6ac, 0.15, 8px);
+  opacity: 0.8;
+  @include animate(opacity, var(--transition-base));
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: var(--z-index-fixed);
+  
+  @include hover-focus {
+    opacity: 1;
+    border-color: var(--border-glow);
+  }
+  
+  // Slide number variants
+  &.top-left {
+    top: 1rem;
+    bottom: auto;
+  }
+  
+  &.top-right {
+    top: 1rem;
+    bottom: auto;
+    left: auto;
+    right: 1rem;
+  }
+  
+  &.bottom-right {
+    left: auto;
+    right: 1rem;
+  }
+}
+
+// Speaker notes indicator
+.reveal .speaker-notes {
+  border-top: 2px solid var(--primary-cyan);
+  background: var(--darker-bg);
+  color: var(--text-secondary);
+  padding: 1rem;
+  font-size: 0.8em;
+  line-height: 1.6;
+  
+  .notes-label {
+    color: var(--primary-cyan);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &::before {
+      content: '📝';
+      font-size: 1.2em;
+    }
+  }
+}
+
+// Overview mode grid
+.reveal.overview {
+  .slides {
+    section {
+      @include animate(all, var(--transition-slow));
+      border: 2px solid transparent;
+      border-radius: 8px;
+      overflow: hidden;
+      
+      &:hover {
+        border-color: var(--border-glow);
+        @include glow(#4dd0e1, 0.2, 12px);
+      }
+      
+      &.present {
+        border-color: var(--primary-cyan);
+        @include glow(#4dd0e1, 0.4, 15px);
+      }
+    }
+  }
+}
+
+// Keyboard shortcuts help overlay
+.reveal-help-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: var(--z-index-modal);
+  @include flex-center;
+  padding: 2rem;
+  opacity: 0;
+  visibility: hidden;
+  @include animate(all, var(--transition-base));
+  
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .help-content {
+    background: var(--surface);
+    border: 1px solid var(--border-base);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    @include glass-effect(0.95, 20px);
+    
+    .help-title {
+      color: var(--text-primary);
+      font-family: var(--font-family-heading);
+      font-size: 1.5em;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      
+      &::before {
+        content: '⌨️ ';
+        margin-right: 0.5rem;
+      }
+    }
+    
+    .help-section {
+      margin-bottom: 2rem;
+      
+      .section-title {
+        color: var(--primary-cyan);
+        font-weight: var(--font-weight-medium);
+        margin-bottom: 1rem;
+        font-size: 1.1em;
+      }
+      
+      .shortcut-list {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0.5rem 0;
+          border-bottom: 1px solid rgba(77, 208, 225, 0.1);
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          .shortcut-key {
+            background: var(--darker-bg);
+            color: var(--primary-cyan);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: var(--font-family-mono);
+            font-size: 0.85em;
+            border: 1px solid var(--border-base);
+            min-width: 2em;
+            text-align: center;
+            
+            &.combo {
+              display: inline-flex;
+              gap: 0.25rem;
+              align-items: center;
+              
+              span {
+                background: none;
+                border: none;
+                padding: 0;
+              }
+              
+              .plus {
+                color: var(--text-muted);
+                font-size: 0.8em;
+              }
+            }
+          }
+          
+          .shortcut-description {
+            flex: 1;
+            margin-left: 1rem;
+            color: var(--text-secondary);
+          }
+        }
+      }
+    }
+    
+    .help-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      @include button-reset;
+      color: var(--text-muted);
+      font-size: 1.5em;
+      width: 2rem;
+      height: 2rem;
+      @include flex-center;
+      border-radius: 50%;
+      @include animate(all, var(--transition-fast));
+      
+      @include hover-focus {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+      }
+      
+      &::before {
+        content: '×';
+      }
+    }
+  }
+}
+
+// Mobile navigation controls
+@include respond-down(md) {
+  .reveal .controls {
+    bottom: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+    
+    button {
+      font-size: 1rem;
+      padding: 0.6em;
+      width: 36px;
+      height: 36px;
+    }
+  }
+  
+  .reveal .slide-number {
+    font-size: 9px;
+    padding: 4px 8px;
+  }
+  
+  .reveal-help-overlay .help-content {
+    margin: 1rem;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+}
+
+// Touch/swipe indicators for mobile
+.reveal .touch-indicator {
+  position: fixed;
+  bottom: 50%;
+  transform: translateY(50%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: var(--z-index-base);
+  font-size: 2rem;
+  color: var(--primary-cyan);
+  @include animate(opacity, var(--transition-base));
+  
+  &.left {
+    left: 1rem;
+    
+    &::before {
+      content: '‹';
+    }
+  }
+  
+  &.right {
+    right: 1rem;
+    
+    &::before {
+      content: '›';
+    }
+  }
+  
+  &.visible {
+    opacity: 0.8;
+  }
+  
+  @include respond-up(md) {
+    display: none;
+  }
+}
+
+// Presentation timer
+.reveal .presentation-timer {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border-base);
+  border-radius: var(--border-radius);
+  padding: 0.5rem 1rem;
+  font-family: var(--font-family-mono);
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  @include glass-effect(0.4, 10px);
+  z-index: var(--z-index-fixed);
+  
+  &.warning {
+    border-color: var(--color-warning);
+    color: var(--color-warning);
+  }
+  
+  &.danger {
+    border-color: var(--color-error);
+    color: var(--color-error);
+    animation: pulse 1s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+// Accessibility enhancements
+.reveal [role="button"] {
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Skip navigation for screen readers
+.skip-navigation {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--z-index-toast);
+  background: var(--surface);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  text-decoration: none;
+  border: 2px solid var(--border-glow);
+  opacity: 0;
+  pointer-events: none;
+  @include animate(all, var(--transition-fast));
+  
+  &:focus {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// Print styles
+@media print {
+  .reveal .progress,
+  .reveal .controls,
+  .reveal .slide-number,
+  .reveal-help-overlay,
+  .presentation-timer {
+    display: none !important;
+  }
+}
+
+// High contrast mode
+@media (prefers-contrast: high) {
+  .reveal .controls button {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+  .reveal .slide-number {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+// Reduced motion
+@media (prefers-reduced-motion: reduce) {
+  .reveal .controls button,
+  .reveal .slide-number,
+  .reveal .progress span {
+    transition: none;
+  }
+  
+  .reveal.overview .slides section {
+    transition: none;
+  }
+  
+  .presentation-timer.danger {
+    animation: none;
+  }
+}

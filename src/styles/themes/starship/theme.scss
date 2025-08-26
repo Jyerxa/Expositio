@@ -1,0 +1,485 @@
+// Starship Theme - Futuristic Presentation Template
+// Professional Presentation Template System
+
+// Theme-specific overrides and customizations
+// This theme maintains the existing futuristic starship aesthetic
+
+// The base variables are already defined in core/_variables.scss
+// This file contains theme-specific customizations and unique elements
+
+// Starfield background effect (theme-specific)
+.reveal.theme-starship {
+  // Enhanced starfield background
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(1px 1px at 25px 35px, rgba(77, 208, 225, 0.15), transparent),
+      radial-gradient(1px 1px at 50px 80px, rgba(77, 182, 172, 0.12), transparent),
+      radial-gradient(1px 1px at 95px 45px, rgba(149, 117, 205, 0.1), transparent),
+      radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.05), transparent),
+      radial-gradient(1px 1px at 170px 35px, rgba(77, 208, 225, 0.1), transparent);
+    background-repeat: repeat;
+    background-size: 220px 220px;
+    pointer-events: none;
+    z-index: var(--z-index-behind);
+    opacity: 0.8;
+    animation: starfieldTwinkle 8s ease-in-out infinite;
+  }
+  
+  // Subtle scanning line effect
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+    opacity: 0.3;
+    animation: scanLine 6s linear infinite;
+    z-index: var(--z-index-behind);
+  }
+}
+
+// Starship-specific slide backgrounds
+.slide-background {
+  &.starship-bridge {
+    background: 
+      radial-gradient(ellipse at 30% 20%, rgba(0, 102, 255, 0.15) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 80%, rgba(77, 182, 172, 0.1) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(5, 8, 16, 0.95) 0%, rgba(10, 15, 28, 0.98) 100%);
+  }
+  
+  &.starship-console {
+    background: 
+      linear-gradient(45deg, rgba(0, 212, 255, 0.08) 0%, rgba(5, 8, 16, 0.95) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 50px,
+        rgba(77, 208, 225, 0.02) 51px,
+        rgba(77, 208, 225, 0.02) 52px
+      );
+  }
+  
+  &.starship-hologram {
+    position: relative;
+    background: radial-gradient(ellipse at center, rgba(108, 92, 231, 0.08) 0%, rgba(5, 8, 16, 0.95) 100%);
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 4px,
+          rgba(77, 208, 225, 0.03) 4px,
+          rgba(77, 208, 225, 0.03) 8px
+        );
+      animation: hologramLines 3s linear infinite;
+      pointer-events: none;
+    }
+  }
+}
+
+// Starship-specific UI elements
+.starship-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-base);
+  border-radius: var(--border-radius);
+  @include glass-effect(0.4, 12px);
+  position: relative;
+  overflow: hidden;
+  
+  // Corner indicators
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: 2px solid var(--primary-cyan);
+    opacity: 0.6;
+  }
+  
+  &::before {
+    top: 8px;
+    left: 8px;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  &::after {
+    bottom: 8px;
+    right: 8px;
+    border-left: none;
+    border-top: none;
+  }
+  
+  // Status indicator
+  .status-indicator {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-success);
+    @include glow(#4caf50, 0.6, 4px);
+    animation: pulse 2s infinite;
+    
+    &.warning {
+      background: var(--color-warning);
+      @include glow(#ff9800, 0.6, 4px);
+    }
+    
+    &.error {
+      background: var(--color-error);
+      @include glow(#f44336, 0.6, 4px);
+    }
+  }
+}
+
+// Command line interface styling
+.starship-terminal {
+  background: #000810;
+  border: 1px solid var(--border-base);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  font-family: var(--font-family-mono);
+  color: var(--primary-cyan);
+  position: relative;
+  
+  &::before {
+    content: 'STARFLEET COMMAND INTERFACE v2.3.1';
+    position: absolute;
+    top: -1px;
+    left: 1rem;
+    background: #000810;
+    padding: 0 0.5rem;
+    font-size: 0.7em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .prompt {
+    color: var(--accent-teal);
+    
+    &::before {
+      content: '> ';
+    }
+  }
+  
+  .output {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    
+    &.success {
+      color: var(--color-success);
+    }
+    
+    &.warning {
+      color: var(--color-warning);
+    }
+    
+    &.error {
+      color: var(--color-error);
+    }
+  }
+  
+  .cursor {
+    background: var(--primary-cyan);
+    animation: blink 1s infinite;
+  }
+}
+
+// Holographic data display
+.holographic-display {
+  background: rgba(77, 208, 225, 0.05);
+  border: 1px solid rgba(77, 208, 225, 0.3);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(77, 208, 225, 0.05) 2px,
+        rgba(77, 208, 225, 0.05) 4px
+      );
+    animation: holographicScan 4s linear infinite;
+    pointer-events: none;
+  }
+  
+  .data-label {
+    color: var(--primary-cyan);
+    font-family: var(--font-family-heading);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  
+  .data-value {
+    color: var(--text-primary);
+    font-family: var(--font-family-mono);
+    font-size: 1.2em;
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+// Starship-specific animations
+@keyframes starfieldTwinkle {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes scanLine {
+  0% { 
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% { 
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes hologramLines {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(8px); }
+}
+
+@keyframes holographicScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+// Neural interface elements
+.neural-interface {
+  .synapse-connection {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      background: var(--primary-cyan);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      @include glow(var(--primary-cyan), 0.8, 8px);
+      animation: synapseActivity 2s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes synapseActivity {
+  0%, 100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 1;
+  }
+}
+
+// Quantum field effects
+.quantum-field {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(149, 117, 205, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(77, 208, 225, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(77, 182, 172, 0.05) 0%, transparent 60%);
+    animation: quantumFluctuation 6s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes quantumFluctuation {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  33% { 
+    opacity: 0.5;
+    transform: scale(1.02);
+  }
+  66% { 
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+}
+
+// Starship UI typography enhancements
+.starship-heading {
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--primary-cyan), transparent);
+    opacity: 0.6;
+  }
+}
+
+.transmission-text {
+  font-family: var(--font-family-mono);
+  color: var(--primary-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  &::before {
+    content: '>>> ';
+    opacity: 0.7;
+  }
+  
+  &::after {
+    content: ' <<<';
+    opacity: 0.7;
+  }
+}
+
+// Energy flow indicators
+.energy-flow {
+  position: relative;
+  overflow: hidden;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(77, 208, 225, 0.4), transparent);
+    animation: energyPulse 3s linear infinite;
+  }
+}
+
+@keyframes energyPulse {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+// System status indicators
+.system-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85em;
+  font-family: var(--font-family-mono);
+  
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-success);
+    @include glow(#4caf50, 0.6, 3px);
+    
+    &.warning {
+      background: var(--color-warning);
+      @include glow(#ff9800, 0.6, 3px);
+    }
+    
+    &.error {
+      background: var(--color-error);
+      @include glow(#f44336, 0.6, 3px);
+    }
+  }
+  
+  .status-text {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+// Responsive adjustments for starship theme
+@include respond-down(md) {
+  .reveal.theme-starship::before {
+    background-size: 150px 150px;
+  }
+  
+  .starship-terminal {
+    padding: 0.75rem;
+    font-size: 0.9em;
+  }
+  
+  .holographic-display {
+    padding: 1rem;
+  }
+  
+  .transmission-text {
+    letter-spacing: 1px;
+  }
+}
+
+// Print mode for starship theme
+@media print {
+  .reveal.theme-starship {
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+  
+  .slide-background::before {
+    display: none;
+  }
+  
+  .starship-panel,
+  .starship-terminal,
+  .holographic-display {
+    background: white !important;
+    border-color: #333 !important;
+    color: black !important;
+  }
+}

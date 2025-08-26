@@ -1,0 +1,239 @@
+// Base Styles and CSS Reset
+// Professional Presentation Template System
+
+// Modern CSS Reset (Inspired by Josh Comeau's reset)
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  @include font-smoothing;
+}
+
+body {
+  line-height: var(--line-height-base);
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  background: var(--dark-bg);
+  overflow-x: hidden;
+}
+
+// Media defaults
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+// Form elements
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  @include button-reset;
+  
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Links
+a {
+  color: var(--color-focus);
+  text-decoration: underline;
+  text-decoration-color: rgba(77, 208, 225, 0.3);
+  text-underline-offset: 0.2em;
+  transition: all var(--transition-fast);
+  
+  @include hover-focus {
+    text-decoration-color: var(--color-focus);
+    color: var(--color-hover);
+  }
+  
+  &:focus-visible {
+    @include focus-ring;
+    text-decoration: none;
+  }
+}
+
+// Remove default button and input focus outlines (we'll add our own)
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+// Accessibility improvements
+[tabindex="-1"]:focus {
+  outline: 0 !important;
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  :root {
+    --primary-cyan: #00e6ff;
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+    --surface: rgba(0, 0, 0, 0.8);
+    --border-base: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Print styles base
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  
+  thead {
+    display: table-header-group;
+  }
+  
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+// Base reveal.js container styling
+.reveal {
+  font-family: var(--font-family-body);
+  background: radial-gradient(ellipse at center, #0f1929 0%, #050810 100%);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+// Starfield background effect
+.reveal::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 25px 35px, rgba(77, 208, 225, 0.15), transparent),
+    radial-gradient(1px 1px at 50px 80px, rgba(77, 182, 172, 0.12), transparent),
+    radial-gradient(1px 1px at 95px 45px, rgba(149, 117, 205, 0.1), transparent),
+    radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.05), transparent),
+    radial-gradient(1px 1px at 170px 35px, rgba(77, 208, 225, 0.1), transparent);
+  background-repeat: repeat;
+  background-size: 220px 220px;
+  pointer-events: none;
+  z-index: var(--z-index-behind);
+  opacity: 0.8;
+}
+
+// Base slides container
+.reveal .slides {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+// Utility classes for common use cases
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.truncate {
+  @include truncate;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.flex-between {
+  @include flex-between;
+}
+
+// Skip link for accessibility
+.skip-link {
+  @include visually-hidden;
+  
+  &:focus {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    z-index: var(--z-index-toast);
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: var(--border-radius-small);
+    border: 2px solid var(--border-glow);
+    clip: auto;
+    width: auto;
+    height: auto;
+  }
+}

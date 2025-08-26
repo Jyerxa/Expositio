@@ -1,0 +1,300 @@
+// Typography System
+// Professional Presentation Template System
+
+// Headings
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--text-primary);
+  margin: 0;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+// Reveal.js specific heading styles
+.reveal h1 {
+  @include fluid-size(font-size, 1.8rem, min(4.5vw, 8vh), 2.8em);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  text-shadow: var(--glow-primary);
+  letter-spacing: var(--letter-spacing-wider);
+  margin-bottom: min(0.8em, 2vh);
+  word-spacing: 0.2em;
+}
+
+.reveal h2 {
+  @include fluid-size(font-size, 1.5rem, min(3.5vw, 6vh), 2.1em);
+  font-weight: var(--font-weight-medium);
+  color: var(--primary-cyan);
+  text-shadow: var(--glow-primary);
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: min(1.2em, 3vh);
+  word-spacing: 0.15em;
+}
+
+.reveal h3 {
+  @include fluid-size(font-size, 1.2rem, min(2.5vw, 4vh), 1.5em);
+  font-weight: var(--font-weight-regular);
+  color: var(--accent-teal);
+  text-shadow: var(--glow-secondary);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: min(1em, 2vh);
+}
+
+.reveal h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  margin-bottom: 0.75em;
+}
+
+.reveal h5 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  margin-bottom: 0.5em;
+}
+
+.reveal h6 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: 0.5em;
+}
+
+// Body text
+.reveal p {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+  @include fluid-size(font-size, 0.9rem, min(2vw, 3vh), 1.05em);
+  margin-bottom: min(1.2em, 2vh);
+  max-width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Lead text (larger paragraph text)
+.reveal .lead {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-primary);
+  margin-bottom: 1.5em;
+  max-width: 90%;
+}
+
+// Small text
+.reveal small {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-base);
+}
+
+// Lists
+.reveal ul,
+.reveal ol {
+  max-width: 80%;
+  margin: min(2rem, 3vh) auto;
+  text-align: left;
+}
+
+.reveal ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.reveal ol {
+  padding-left: 1.5rem;
+}
+
+.reveal li {
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-relaxed);
+  color: var(--text-secondary);
+  @include fluid-size(font-size, 0.9rem, min(2vw, 3vh), 1.05em);
+  margin-bottom: min(0.8em, 1.5vh);
+  position: relative;
+}
+
+// Custom bullet points for unordered lists
+.reveal ul li {
+  padding-left: min(1.5rem, 2vw);
+  
+  &::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-cyan);
+    text-shadow: var(--glow-secondary);
+    font-size: 0.9em;
+    top: 0.1em;
+  }
+}
+
+// Nested lists
+.reveal li li {
+  margin-bottom: 0.5em;
+  font-size: 0.95em;
+}
+
+.reveal ul ul li::before {
+  content: '▪';
+  color: var(--accent-teal);
+}
+
+// Definition lists
+.reveal dl {
+  max-width: 85%;
+  margin: 2rem auto;
+}
+
+.reveal dt {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.reveal dd {
+  color: var(--text-secondary);
+  margin-left: 2rem;
+  margin-bottom: 1em;
+}
+
+// Emphasis and strong
+.reveal em {
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+.reveal strong {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+// Mark/highlight
+.reveal mark {
+  background: linear-gradient(120deg, rgba(77, 208, 225, 0.2) 0%, rgba(77, 208, 225, 0.1) 100%);
+  color: var(--text-primary);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+// Subscript and superscript
+.reveal sub,
+.reveal sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+.reveal sup {
+  top: -0.5em;
+}
+
+.reveal sub {
+  bottom: -0.25em;
+}
+
+// Text alignment utilities
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+.text-justify { text-align: justify !important; }
+
+// Font weight utilities
+.font-light { font-weight: var(--font-weight-light) !important; }
+.font-regular { font-weight: var(--font-weight-regular) !important; }
+.font-medium { font-weight: var(--font-weight-medium) !important; }
+.font-semibold { font-weight: var(--font-weight-semibold) !important; }
+.font-bold { font-weight: var(--font-weight-bold) !important; }
+
+// Font size utilities
+.text-xs { font-size: var(--font-size-xs) !important; }
+.text-sm { font-size: var(--font-size-sm) !important; }
+.text-base { font-size: var(--font-size-base) !important; }
+.text-lg { font-size: var(--font-size-lg) !important; }
+.text-xl { font-size: var(--font-size-xl) !important; }
+.text-2xl { font-size: var(--font-size-2xl) !important; }
+.text-3xl { font-size: var(--font-size-3xl) !important; }
+
+// Color utilities
+.text-primary { color: var(--text-primary) !important; }
+.text-secondary { color: var(--text-secondary) !important; }
+.text-muted { color: var(--text-muted) !important; }
+.text-cyan { color: var(--primary-cyan) !important; }
+.text-teal { color: var(--accent-teal) !important; }
+.text-blue { color: var(--primary-blue) !important; }
+
+// Special typography effects
+.glow-text {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-cyan), var(--accent-teal));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+// Reading experience optimizations
+.reveal .readable {
+  max-width: 65ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+  line-height: 1.8;
+}
+
+// Responsive typography adjustments
+@include respond-down(md) {
+  .reveal h1 {
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  
+  .reveal h2 {
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .reveal p {
+    max-width: 95%;
+  }
+  
+  .reveal ul {
+    max-width: 95%;
+  }
+}
+
+// Print typography
+@media print {
+  .reveal h1,
+  .reveal h2,
+  .reveal h3 {
+    text-shadow: none !important;
+    color: black !important;
+  }
+  
+  .reveal p,
+  .reveal li {
+    color: black !important;
+  }
+}

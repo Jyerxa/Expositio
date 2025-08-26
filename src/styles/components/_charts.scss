@@ -1,0 +1,469 @@
+// Chart and Data Visualization Components
+// Professional Presentation Template System
+
+// Chart container styling for responsive charts
+.chart-container {
+  position: relative;
+  width: min(90%, 600px);
+  height: min(300px, 25vh);
+  margin: min(2rem, 3vh) auto;
+  @include glass-effect(0.85, 12px);
+  border: 1px solid rgba(77, 182, 172, 0.25);
+  border-radius: var(--border-radius);
+  padding: min(1.5rem, 2vh);
+  @include glow(#4db6ac, 0.15, 8px);
+  box-shadow: 
+    var(--glow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  overflow: hidden;
+  
+  // Gradient border effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-teal), var(--primary-cyan), var(--accent-teal));
+    opacity: 0.8;
+    z-index: var(--z-index-base);
+  }
+  
+  // Chart title
+  .chart-title {
+    position: absolute;
+    top: 0.75rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    color: var(--text-primary);
+    font-family: var(--font-family-heading);
+    font-size: 0.9em;
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    z-index: var(--z-index-base);
+    pointer-events: none;
+  }
+  
+  // Responsive canvas
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 8px;
+  }
+}
+
+// Large chart variant
+.chart-container.large {
+  width: min(95%, 800px);
+  height: min(400px, 35vh);
+  
+  @include respond-down(md) {
+    width: 100%;
+    height: min(300px, 30vh);
+    padding: 1rem;
+  }
+}
+
+// Small/compact chart variant
+.chart-container.compact {
+  width: min(80%, 400px);
+  height: min(200px, 20vh);
+  padding: 1rem;
+}
+
+// Chart grid layout for multiple charts
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: min(2rem, 3vh);
+  margin: min(2rem, 3vh) auto;
+  width: 95%;
+  
+  @include respond-down(md) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .chart-container {
+    margin: 0;
+    width: 100%;
+    height: min(250px, 22vh);
+  }
+}
+
+// Chart with data table
+.chart-with-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: min(2rem, 3vw);
+  margin: min(2rem, 3vh) auto;
+  width: 95%;
+  align-items: start;
+  
+  @include respond-down(md) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .chart-container {
+    margin: 0;
+    width: 100%;
+  }
+  
+  .data-table {
+    @include glass-effect(0.3, 10px);
+    border: 1px solid var(--border-base);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.85em;
+      
+      th,
+      td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(77, 208, 225, 0.1);
+      }
+      
+      th {
+        background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+        color: var(--text-primary);
+        font-family: var(--font-family-heading);
+        font-weight: var(--font-weight-medium);
+        text-shadow: var(--glow-primary);
+        letter-spacing: 0.5px;
+        font-size: 0.8em;
+      }
+      
+      td {
+        background: rgba(15, 25, 45, 0.3);
+        color: var(--text-secondary);
+        
+        &.number {
+          text-align: right;
+          font-family: var(--font-family-mono);
+          color: var(--primary-cyan);
+        }
+      }
+      
+      tr:hover td {
+        background: var(--surface-hover);
+        color: var(--text-primary);
+      }
+      
+      tr:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+// Chart legend enhancements
+.chart-legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.85em;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+// KPI/metric cards for dashboards
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin: min(2rem, 3vh) auto;
+  width: 90%;
+  
+  .metric-card {
+    @include glass-effect(0.3, 10px);
+    border: 1px solid var(--border-base);
+    border-radius: var(--border-radius);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    @include animate(all, var(--transition-base));
+    
+    @include hover-focus {
+      transform: translateY(-3px);
+      border-color: var(--border-glow);
+      @include glow(#4dd0e1, 0.2, 12px);
+    }
+    
+    .metric-value {
+      font-size: 2em;
+      font-weight: var(--font-weight-bold);
+      color: var(--primary-cyan);
+      font-family: var(--font-family-mono);
+      margin-bottom: 0.5rem;
+      text-shadow: var(--glow-primary);
+      
+      &.positive {
+        color: var(--color-success);
+      }
+      
+      &.negative {
+        color: var(--color-error);
+      }
+    }
+    
+    .metric-label {
+      color: var(--text-secondary);
+      font-size: 0.9em;
+      font-weight: var(--font-weight-medium);
+      margin-bottom: 0.5rem;
+    }
+    
+    .metric-change {
+      font-size: 0.8em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.25rem;
+      
+      &.positive {
+        color: var(--color-success);
+        
+        &::before {
+          content: '↗';
+        }
+      }
+      
+      &.negative {
+        color: var(--color-error);
+        
+        &::before {
+          content: '↘';
+        }
+      }
+      
+      &.neutral {
+        color: var(--text-muted);
+        
+        &::before {
+          content: '→';
+        }
+      }
+    }
+  }
+}
+
+// Progress bars and indicators
+.progress-container {
+  margin: min(2rem, 3vh) auto;
+  width: 80%;
+  
+  .progress-item {
+    margin-bottom: 1.5rem;
+    
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.9em;
+      
+      .progress-name {
+        color: var(--text-secondary);
+      }
+      
+      .progress-value {
+        color: var(--primary-cyan);
+        font-weight: var(--font-weight-medium);
+        font-family: var(--font-family-mono);
+      }
+    }
+    
+    .progress-bar {
+      height: 8px;
+      background: rgba(77, 208, 225, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--primary-cyan), var(--accent-teal));
+        border-radius: 4px;
+        @include animate(width, var(--transition-slow));
+        position: relative;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          animation: shimmer-progress 2s infinite;
+        }
+      }
+    }
+  }
+}
+
+@keyframes shimmer-progress {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+// Interactive chart controls
+.chart-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem auto;
+  flex-wrap: wrap;
+  
+  .chart-control {
+    @include button-reset;
+    padding: 0.5rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border-base);
+    border-radius: 6px;
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    @include animate(all, var(--transition-fast));
+    
+    @include hover-focus {
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+    }
+    
+    &.active {
+      background: var(--primary-cyan);
+      color: var(--text-inverse);
+      border-color: var(--primary-cyan);
+    }
+  }
+}
+
+// Data visualization animations
+@keyframes chartFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.chart-container {
+  animation: chartFadeIn 0.6s ease-out;
+}
+
+// Accessibility enhancements
+.chart-container {
+  &:focus-within {
+    @include focus-ring(var(--primary-cyan), 2px, 2px);
+  }
+}
+
+// Screen reader only chart descriptions
+.chart-description {
+  @include visually-hidden;
+}
+
+// High contrast adjustments
+@media (prefers-contrast: high) {
+  .chart-container {
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(0, 0, 0, 0.9);
+  }
+  
+  .metric-card {
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+  .chart-container {
+    animation: none;
+  }
+  
+  .progress-fill {
+    transition: none;
+  }
+  
+  .progress-fill::after {
+    animation: none;
+  }
+}
+
+// Print styles for charts
+@media print {
+  .chart-container {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  
+  .chart-container::before {
+    display: none;
+  }
+  
+  .metric-card {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    color: black !important;
+  }
+  
+  .metric-value {
+    color: black !important;
+    text-shadow: none !important;
+  }
+  
+  .chart-controls {
+    display: none;
+  }
+}
+
+// Responsive adjustments
+@include respond-down(md) {
+  .chart-container {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .chart-with-table {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .chart-controls {
+    gap: 0.5rem;
+    
+    .chart-control {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8em;
+    }
+  }
+}

@@ -1,0 +1,136 @@
+// Core CSS Custom Properties and Variables
+// Professional Presentation Template System
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+// Root CSS Custom Properties for Theme System
+:root {
+  // Content and Layout
+  --content-max-width: 900px;
+  --slide-padding: 2rem;
+  --border-radius: 16px;
+  --border-radius-small: 8px;
+  
+  // Spacing Scale (Based on 8px grid system)
+  --space-xs: 0.5rem;   // 8px
+  --space-sm: 1rem;     // 16px
+  --space-md: 1.5rem;   // 24px
+  --space-lg: 2rem;     // 32px
+  --space-xl: 2.5rem;   // 40px
+  --space-xxl: 3rem;    // 48px
+  
+  // Typography Scale
+  --font-size-xs: 0.7em;
+  --font-size-sm: 0.85em;
+  --font-size-base: 1em;
+  --font-size-lg: 1.15em;
+  --font-size-xl: 1.5em;
+  --font-size-2xl: 2.1em;
+  --font-size-3xl: 2.8em;
+  
+  // Font Families
+  --font-family-heading: 'Orbitron', monospace;
+  --font-family-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+  
+  // Font Weights
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+  
+  // Line Heights
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.7;
+  
+  // Letter Spacing
+  --letter-spacing-tight: -0.5px;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.5px;
+  --letter-spacing-wider: 1.5px;
+  
+  // Transitions and Animations
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s ease;
+  --transition-slow: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  --transition-bounce: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  
+  // Z-index Scale
+  --z-index-behind: -1;
+  --z-index-base: 1;
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-popover: 1060;
+  --z-index-tooltip: 1070;
+  --z-index-toast: 1080;
+}
+
+// Theme-specific variables (Starship theme as default)
+:root {
+  // Brand Colors
+  --primary-cyan: #4dd0e1;
+  --primary-blue: #42a5f5;
+  --accent-teal: #4db6ac;
+  --accent-purple: #9575cd;
+  
+  // Background Colors
+  --dark-bg: #0a0f1c;
+  --darker-bg: #050911;
+  --surface: rgba(20, 30, 50, 0.4);
+  --surface-light: rgba(20, 30, 50, 0.6);
+  --surface-hover: rgba(77, 208, 225, 0.05);
+  
+  // Text Colors
+  --text-primary: #ecf2ff;
+  --text-secondary: #b8c9e0;
+  --text-muted: #8fa8c7;
+  --text-inverse: #0a0f1c;
+  
+  // Glow Effects
+  --glow-primary: 0 0 12px rgba(77, 208, 225, 0.2);
+  --glow-secondary: 0 0 8px rgba(77, 182, 172, 0.15);
+  --glow-intense: 0 0 20px rgba(77, 208, 225, 0.25);
+  
+  // Border Colors
+  --border-base: rgba(77, 208, 225, 0.2);
+  --border-glow: rgba(77, 208, 225, 0.25);
+  --border-intense: rgba(77, 208, 225, 0.4);
+  
+  // Interactive States
+  --color-focus: var(--primary-cyan);
+  --color-hover: var(--accent-teal);
+  --color-active: var(--primary-blue);
+  
+  // Status Colors
+  --color-success: #4caf50;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-info: var(--primary-blue);
+}
+
+// Responsive Breakpoints
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Export breakpoint values for JavaScript
+:export {
+  xs: #{map-get($breakpoints, xs)};
+  sm: #{map-get($breakpoints, sm)};
+  md: #{map-get($breakpoints, md)};
+  lg: #{map-get($breakpoints, lg)};
+  xl: #{map-get($breakpoints, xl)};
+  xxl: #{map-get($breakpoints, xxl)};
+}

@@ -1,0 +1,442 @@
+// Slide Components and Layouts
+// Professional Presentation Template System
+
+// Base slide container
+.reveal .slides section {
+  padding: var(--slide-padding);
+  box-sizing: border-box;
+}
+
+// Present slide styling with viewport constraints
+.reveal .slides section.present {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  max-height: 100vh;
+  text-align: center;
+  padding: min(2rem, 3vh) min(2rem, 3vw);
+  box-sizing: border-box;
+  container-type: size;
+}
+
+// Vertical rhythm for slide content
+.reveal .slides section > * + * {
+  margin-top: min(1.5rem, 2vh);
+}
+
+.reveal .slides section > h1 + * {
+  margin-top: min(2rem, 3vh);
+}
+
+.reveal .slides section > h2 + * {
+  margin-top: min(1.8rem, 2.5vh);
+}
+
+// Title slide layout
+.title-slide {
+  background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.15) 0%, rgba(5, 8, 16, 0.95) 100%);
+  
+  h1 {
+    margin-bottom: min(1rem, 2vh);
+  }
+  
+  h3 {
+    margin-bottom: min(2rem, 4vh);
+  }
+  
+  p {
+    max-width: 100%;
+  }
+  
+  small {
+    opacity: 0.8;
+  }
+}
+
+// Content slide variations
+.content-slide {
+  h2 + p {
+    margin-top: min(1.5rem, 3vh);
+  }
+  
+  h2 + ul {
+    margin-top: min(1.8rem, 3vh);
+  }
+}
+
+// Two-column layout
+.columns {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: min(2.5rem, 4vw);
+  max-width: 100%;
+  margin: min(2rem, 3vh) auto;
+  
+  @include respond-down(md) {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem auto;
+  }
+}
+
+.column {
+  flex: 1;
+  text-align: left;
+  @include glass-effect(0.4, 12px);
+  border: 1px solid var(--border-base);
+  border-radius: var(--border-radius);
+  padding: min(2.5rem, 4vh) min(2rem, 3vw);
+  @include glow(#4dd0e1, 0.2, 12px);
+  box-shadow: 
+    var(--glow-primary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  @include animate(all, var(--transition-slow));
+  min-height: min(200px, 25vh);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  @include hover-focus {
+    border-color: var(--border-glow);
+    box-shadow: 
+      var(--glow-intense),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+  }
+  
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+  
+  p {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    flex-grow: 1;
+  }
+  
+  @include respond-down(md) {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+}
+
+// Three-column layout
+.columns-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: min(2rem, 3vw);
+  margin: min(2rem, 3vh) auto;
+  
+  @include respond-down(lg) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .column {
+    min-height: min(180px, 20vh);
+  }
+}
+
+// Quote/blockquote slide
+.quote-slide {
+  blockquote {
+    font-style: italic;
+    width: 80%;
+    margin: min(3rem, 4vh) auto;
+    padding: min(2.5rem, 3vh) min(2rem, 3vw);
+    background: rgba(77, 208, 225, 0.03);
+    border: 1px solid var(--border-base);
+    border-left: 3px solid var(--primary-cyan);
+    border-radius: var(--border-radius);
+    @include glass-effect(0.3, 20px);
+    box-shadow: 
+      var(--glow-primary),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+    @include fluid-size(font-size, 1rem, min(2.2vw, 3.5vh), 1.15em);
+    line-height: 1.8;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+      animation: shimmer 4s ease-in-out infinite;
+      opacity: 0.6;
+    }
+    
+    &::after {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 4em;
+      color: var(--primary-cyan);
+      opacity: 0.3;
+      font-family: serif;
+      line-height: 1;
+    }
+  }
+  
+  .attribution {
+    margin-top: min(1.5rem, 2vh);
+    color: var(--text-muted);
+    font-style: normal;
+    
+    &::before {
+      content: '— ';
+    }
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+// Image slide layouts
+.image-slide {
+  img {
+    max-width: min(100%, 90vw);
+    max-height: min(400px, 40vh);
+    height: auto;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    @include glow(#00d4ff, 0.2, 15px);
+    box-shadow: 
+      var(--glow-primary),
+      0 10px 40px rgba(0, 0, 0, 0.3);
+    @include animate(all, var(--transition-base));
+    
+    @include hover-focus {
+      border-color: var(--border-glow);
+      box-shadow: 
+        var(--glow-intense),
+        0 10px 40px rgba(0, 0, 0, 0.4);
+      transform: scale(1.02);
+    }
+  }
+  
+  figcaption {
+    margin-top: min(1rem, 1.5vh);
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+    font-style: italic;
+  }
+}
+
+// Gallery layout
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: min(2rem, 3vh);
+  margin: min(2rem, 3vh) auto;
+  
+  img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    @include animate(transform, var(--transition-base));
+    
+    @include hover-focus {
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Team/speaker slide
+.team-slide {
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: min(2rem, 3vw);
+    margin: min(2rem, 3vh) auto;
+  }
+  
+  .team-member {
+    text-align: center;
+    padding: min(2rem, 3vh) min(1.5rem, 2vw);
+    @include glass-effect(0.3, 10px);
+    border: 1px solid var(--border-base);
+    border-radius: var(--border-radius);
+    @include animate(all, var(--transition-base));
+    
+    @include hover-focus {
+      transform: translateY(-5px);
+      border-color: var(--border-glow);
+    }
+    
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      border: 2px solid var(--primary-cyan);
+      object-fit: cover;
+    }
+    
+    .name {
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+    
+    .title {
+      color: var(--text-secondary);
+      font-size: var(--font-size-sm);
+      margin-bottom: 1rem;
+    }
+    
+    .bio {
+      color: var(--text-muted);
+      font-size: var(--font-size-sm);
+      line-height: 1.6;
+    }
+  }
+}
+
+// Call-to-action slide
+.cta-slide {
+  .cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    margin-top: min(2rem, 3vh);
+    background: linear-gradient(135deg, var(--primary-cyan), var(--accent-teal));
+    color: var(--text-inverse);
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    font-weight: var(--font-weight-semibold);
+    @include animate(all, var(--transition-base));
+    @include glow(#4dd0e1, 0.3, 15px);
+    
+    @include hover-focus {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 
+        var(--glow-intense),
+        0 10px 30px rgba(77, 208, 225, 0.4);
+    }
+    
+    @include active {
+      transform: translateY(0) scale(1.02);
+    }
+  }
+}
+
+// Zoom-specific adjustments
+@media screen and (max-height: 600px), screen and (min-resolution: 150dpi) {
+  .reveal .slides section.present {
+    justify-content: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .reveal h1 {
+    @include fluid-size(font-size, 1.5rem, 4vw, 2.2em);
+    margin-bottom: 0.5em;
+  }
+  
+  .reveal h2 {
+    @include fluid-size(font-size, 1.2rem, 3vw, 1.8em);
+    margin-bottom: 0.8em;
+  }
+  
+  .reveal .slides section > * + * {
+    margin-top: 1rem;
+  }
+}
+
+// Very high zoom levels or very small screens
+@media screen and (max-height: 400px) {
+  .reveal .slides section.present {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .reveal h1 {
+    @include fluid-size(font-size, 1.2rem, 3.5vw, 1.8em);
+    margin-bottom: 0.3em;
+  }
+  
+  .reveal h2 {
+    @include fluid-size(font-size, 1rem, 3vw, 1.5em);
+    margin-bottom: 0.5em;
+  }
+  
+  .reveal p {
+    @include fluid-size(font-size, 0.8rem, 1.8vw, 0.95em);
+    margin-bottom: 0.8em;
+  }
+  
+  .reveal .slides section > * + * {
+    margin-top: 0.5rem;
+  }
+}
+
+// Fragment animations
+.reveal .slides section .fragment {
+  opacity: 0;
+  visibility: hidden;
+  @include animate(all, var(--transition-bounce));
+  transform: translateY(20px);
+  
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  // Fragment animation variants
+  &.fade-in {
+    transform: none;
+  }
+  
+  &.slide-in-left {
+    transform: translateX(-50px);
+  }
+  
+  &.slide-in-right {
+    transform: translateX(50px);
+  }
+  
+  &.zoom-in {
+    transform: scale(0.8);
+  }
+  
+  &.visible {
+    &.slide-in-left,
+    &.slide-in-right,
+    &.zoom-in {
+      transform: none;
+    }
+  }
+}
+
+// Accessibility improvements
+.reveal .slides section[aria-hidden="true"] {
+  pointer-events: none;
+}
+
+// Print-specific slide styling
+@media print {
+  .reveal .slides section {
+    page-break-inside: avoid;
+    page-break-after: auto;
+    background: white !important;
+    color: black !important;
+  }
+  
+  .column {
+    background: white !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}

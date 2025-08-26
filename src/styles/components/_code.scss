@@ -1,0 +1,477 @@
+// Code and Syntax Highlighting Components
+// Professional Presentation Template System
+
+// Pre-formatted code blocks
+.reveal pre {
+  background: rgba(8, 12, 20, 0.85);
+  border: 1px solid rgba(77, 182, 172, 0.25);
+  border-radius: var(--border-radius);
+  @include glow(#4db6ac, 0.15, 8px);
+  box-shadow: 
+    var(--glow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  width: 90%;
+  margin: min(2rem, 3vh) auto;
+  @include fluid-size(font-size, 0.7em, 1.8vh, 0.9em);
+  position: relative;
+  overflow: hidden;
+  
+  // Gradient border effect
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-teal), var(--primary-cyan), var(--accent-teal));
+    opacity: 0.8;
+  }
+  
+  // Language indicator
+  &[data-language]::after {
+    content: attr(data-language);
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    font-size: 0.7em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-family: var(--font-family-body);
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.reveal pre code {
+  padding: min(2rem, 3vh) min(2.5rem, 3vw);
+  max-height: min(450px, 40vh);
+  font-family: var(--font-family-mono);
+  background: transparent;
+  line-height: 1.6;
+  @include fluid-size(font-size, 0.7rem, min(1.5vw, 2vh), inherit);
+  color: var(--text-primary);
+  display: block;
+  overflow-y: auto;
+  border: none;
+  
+  // Custom scrollbar for code blocks
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-base);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--border-glow);
+    }
+  }
+}
+
+// Inline code
+.reveal code {
+  background: rgba(77, 208, 225, 0.1);
+  color: var(--primary-cyan);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-family-mono);
+  font-size: 0.9em;
+  border: 1px solid rgba(77, 208, 225, 0.2);
+  white-space: nowrap;
+}
+
+// Code block with title
+.code-block-titled {
+  position: relative;
+  margin: min(2rem, 3vh) auto;
+  width: 90%;
+  
+  .code-title {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+    color: var(--text-primary);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-family: var(--font-family-mono);
+    font-size: 0.85em;
+    font-weight: var(--font-weight-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &::before {
+      content: '📄';
+      font-size: 1em;
+    }
+  }
+  
+  pre {
+    margin: 0;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    border-top: none;
+    
+    &::before {
+      display: none;
+    }
+  }
+}
+
+// Code comparison (side-by-side)
+.code-comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: min(2rem, 3vh) auto;
+  width: 95%;
+  
+  @include respond-down(md) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .code-block {
+    position: relative;
+    
+    .code-label {
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      background: var(--surface);
+      color: var(--text-secondary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75em;
+      font-weight: var(--font-weight-medium);
+      z-index: var(--z-index-base);
+      
+      &.before {
+        color: var(--color-error);
+        
+        &::before {
+          content: '❌ ';
+        }
+      }
+      
+      &.after {
+        color: var(--color-success);
+        
+        &::before {
+          content: '✅ ';
+        }
+      }
+    }
+    
+    pre {
+      margin: 0;
+      width: 100%;
+    }
+  }
+}
+
+// Terminal/console styling
+.terminal {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  margin: min(2rem, 3vh) auto;
+  width: 90%;
+  
+  .terminal-header {
+    background: #2d2d2d;
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid #333;
+    
+    .terminal-buttons {
+      display: flex;
+      gap: 0.5rem;
+      
+      span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        
+        &.close { background: #ff5f57; }
+        &.minimize { background: #ffbd2e; }
+        &.maximize { background: #28ca42; }
+      }
+    }
+    
+    .terminal-title {
+      color: #999;
+      font-size: 0.85em;
+      margin-left: auto;
+    }
+  }
+  
+  pre {
+    background: transparent;
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    
+    &::before {
+      display: none;
+    }
+  }
+  
+  code {
+    color: #00ff00;
+    background: transparent;
+    border: none;
+    padding: 1.5rem;
+    
+    .prompt {
+      color: #00d4ff;
+      
+      &::before {
+        content: '$ ';
+      }
+    }
+    
+    .output {
+      color: #fff;
+      opacity: 0.8;
+    }
+    
+    .error {
+      color: #ff6b6b;
+    }
+    
+    .success {
+      color: #51cf66;
+    }
+  }
+}
+
+// Diff styling
+.diff {
+  pre {
+    background: #0d1117;
+    border: 1px solid #30363d;
+  }
+  
+  code {
+    .line {
+      display: block;
+      padding: 0 1rem;
+      
+      &.added {
+        background: rgba(46, 160, 67, 0.15);
+        border-left: 3px solid #238636;
+        
+        &::before {
+          content: '+ ';
+          color: #238636;
+        }
+      }
+      
+      &.removed {
+        background: rgba(248, 81, 73, 0.15);
+        border-left: 3px solid #da3633;
+        
+        &::before {
+          content: '- ';
+          color: #da3633;
+        }
+      }
+      
+      &.unchanged {
+        opacity: 0.7;
+        
+        &::before {
+          content: '  ';
+        }
+      }
+    }
+  }
+}
+
+// Copy button for code blocks
+.code-container {
+  position: relative;
+  
+  .copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    @include button-reset;
+    background: var(--surface);
+    color: var(--text-muted);
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-base);
+    font-size: 0.75em;
+    opacity: 0;
+    @include animate(all, var(--transition-fast));
+    z-index: var(--z-index-base);
+    
+    &::before {
+      content: '📋';
+      margin-right: 0.25rem;
+    }
+    
+    @include hover-focus {
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+    }
+    
+    &.copied {
+      color: var(--color-success);
+      
+      &::before {
+        content: '✅';
+      }
+    }
+  }
+  
+  &:hover .copy-button {
+    opacity: 1;
+  }
+}
+
+// Line numbers
+.line-numbers {
+  pre {
+    counter-reset: line-numbering;
+  }
+  
+  code {
+    .line {
+      counter-increment: line-numbering;
+      padding-left: 3em;
+      position: relative;
+      
+      &::before {
+        content: counter(line-numbering);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 2.5em;
+        text-align: right;
+        color: var(--text-muted);
+        font-size: 0.85em;
+        border-right: 1px solid var(--border-base);
+        padding-right: 0.5em;
+        margin-right: 0.5em;
+      }
+    }
+  }
+}
+
+// Syntax highlighting theme adjustments
+.reveal pre code {
+  // Keywords
+  .hljs-keyword,
+  .hljs-built_in,
+  .hljs-type {
+    color: var(--primary-cyan);
+  }
+  
+  // Strings
+  .hljs-string,
+  .hljs-attr {
+    color: #a9dc76;
+  }
+  
+  // Numbers
+  .hljs-number,
+  .hljs-literal {
+    color: #ff9800;
+  }
+  
+  // Comments
+  .hljs-comment,
+  .hljs-quote {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  
+  // Functions
+  .hljs-function,
+  .hljs-title {
+    color: var(--accent-teal);
+  }
+  
+  // Variables
+  .hljs-variable,
+  .hljs-name {
+    color: var(--text-secondary);
+  }
+  
+  // Operators
+  .hljs-operator,
+  .hljs-punctuation {
+    color: var(--text-primary);
+  }
+  
+  // Tags (HTML/XML)
+  .hljs-tag,
+  .hljs-selector-tag {
+    color: var(--primary-blue);
+  }
+  
+  // Attributes
+  .hljs-attribute {
+    color: var(--accent-purple);
+  }
+}
+
+// Responsive adjustments
+@include respond-down(md) {
+  .reveal pre {
+    width: 95%;
+    font-size: 0.8em;
+  }
+  
+  .reveal pre code {
+    padding: 1.5rem;
+  }
+  
+  .code-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .terminal .terminal-header {
+    padding: 0.5rem;
+    
+    .terminal-title {
+      display: none;
+    }
+  }
+}
+
+// Print styles for code
+@media print {
+  .reveal pre {
+    background: #f8f9fa !important;
+    border: 1px solid #dee2e6 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  
+  .reveal pre code {
+    color: black !important;
+  }
+  
+  .reveal code {
+    background: #f1f3f4 !important;
+    color: #333 !important;
+    border: 1px solid #ccc !important;
+  }
+  
+  .copy-button {
+    display: none !important;
+  }
+}
