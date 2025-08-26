@@ -371,7 +371,7 @@ function autoInitialize(): void {
 
   // Make presentation available globally for debugging
   if (IS_DEV) {
-    (window as unknown as { presentationTemplate: PresentationTemplate }).presentationTemplate = presentation;
+    (window as any).presentationTemplate = presentation;
   }
 }
 
@@ -382,8 +382,8 @@ function getConfigFromDOM(): Partial<PresentationConfig> {
   const config: Partial<PresentationConfig> = {};
 
   // Check for global configuration
-  if (typeof window !== 'undefined' && (window as unknown as { PRESENTATION_CONFIG?: Partial<PresentationConfig> }).PRESENTATION_CONFIG) {
-    Object.assign(config, (window as unknown as { PRESENTATION_CONFIG: Partial<PresentationConfig> }).PRESENTATION_CONFIG);
+  if (typeof window !== 'undefined' && (window as any).PRESENTATION_CONFIG) {
+    Object.assign(config, (window as any).PRESENTATION_CONFIG);
   }
 
   // Check reveal container for data attributes
