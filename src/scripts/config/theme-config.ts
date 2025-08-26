@@ -173,7 +173,7 @@ export class ThemeManager {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'style';
-        link.href = `/src/styles/themes/${themeName}/theme.css`;
+        link.href = `${this.themeBasePath}${themeName}/theme.css`;
         document.head.appendChild(link);
       } catch (error) {
         console.warn(`Failed to preload theme ${themeName}:`, error);
