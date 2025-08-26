@@ -156,8 +156,6 @@
 }
 
 // Active state
-@mixin active {
-
   &:active,
   &.active {
     @content;
