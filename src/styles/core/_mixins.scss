@@ -147,6 +147,7 @@
 }
 
 // Hover and focus states
+@mixin hover-focus {
   &:hover,
   &:focus {
     @content;
@@ -154,6 +155,7 @@
 }
 
 // Active state
+@mixin active {
   &:active,
   &.active {
     @content;
