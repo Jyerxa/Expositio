@@ -334,7 +334,7 @@ class PresentationTemplate {
           const themes = ['starship', 'corporate', 'academic', 'minimal'];
           const currentIndex = themes.indexOf(this.config.theme.name);
           const nextIndex = (currentIndex + 1) % themes.length;
-          this.switchTheme(themes[nextIndex]!);
+          this.switchTheme(themes[nextIndex] as string);
         }
       );
     }
