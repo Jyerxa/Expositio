@@ -2,8 +2,9 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import legacy from '@vitejs/plugin-legacy';
+import autoprefixer from 'autoprefixer';
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   // Build configuration
   build: {
     lib: {
@@ -70,30 +71,25 @@ export default defineConfig({
     postcss: {
       plugins: [
         // Add vendor prefixes
-        require('autoprefixer')({
-          overrideBrowserslist: [
-            '> 1%',
-            'last 2 versions',
-            'not dead'
-          ]
-        })
+        autoprefixer()
       ]
     }
   },
 
   // Plugins
   plugins: [
-    // Generate TypeScript declaration files
     dts({
       include: ['src/**/*'],
       exclude: ['**/*.test.ts', '**/*.spec.ts'],
       rollupTypes: true
     }),
-
-    // Legacy browser support
-    legacy({
-      targets: ['defaults', 'not IE 11']
-    })
+    ...(command === 'build'
+      ? [
+        legacy({
+          targets: ['defaults', 'not IE 11']
+        })
+      ]
+      : [])
   ],
 
   // Path resolution
@@ -136,4 +132,4 @@ export default defineConfig({
       return { runtime: `window.__prependStaticUrl("${filename}")` };
     }
   }
-});
+}));

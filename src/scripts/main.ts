@@ -10,7 +10,7 @@
 import '../styles/main.scss';
 
 // Import types and configurations
-import { PresentationConfig, RevealConfig } from './config/types';
+import { PresentationConfig } from './config/types';
 import { createRevealConfig } from './config/reveal-config';
 import { initializeCharts } from './plugins/chart-integration';
 import { initializeThemeSystem } from './plugins/theme-switcher';
@@ -26,9 +26,8 @@ import Zoom from 'reveal.js/plugin/zoom/zoom.esm.js';
 import Search from 'reveal.js/plugin/search/search.esm.js';
 
 // Global constants
-const VERSION = __VERSION__ || '2.0.0';
-const IS_DEV = __DEV__ || false;
-const IS_PRODUCTION = __PRODUCTION__ || false;
+const VERSION: string = (typeof __VERSION__ !== 'undefined' && __VERSION__) || '2.0.0';
+const IS_DEV: boolean = typeof __DEV__ !== 'undefined' ? __DEV__ : false;
 
 // Logger utility
 const logger = {
@@ -177,11 +176,11 @@ class PresentationTemplate {
       // Remove event listeners
       Reveal.off('slidechanged');
       Reveal.off('ready');
-      
+
       // Destroy Reveal.js
       // Note: Reveal.js doesn't have a native destroy method
       // This is a placeholder for cleanup logic
-      
+
       this.reveal = null;
       this.isInitialized = false;
       logger.info('Presentation destroyed');
@@ -269,7 +268,7 @@ class PresentationTemplate {
    */
   private deepMerge<T>(target: T, source: Partial<T>): T {
     const result = { ...target };
-    
+
     for (const key in source) {
       if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
         result[key] = this.deepMerge(result[key], source[key]!);
@@ -277,7 +276,7 @@ class PresentationTemplate {
         result[key] = source[key]!;
       }
     }
-    
+
     return result;
   }
 
@@ -290,7 +289,7 @@ class PresentationTemplate {
     // Slide change events
     Reveal.on('slidechanged', (event: { previousSlide: Element; currentSlide: Element; indexh: number; indexv: number }) => {
       logger.info(`Slide changed to: ${event.indexh}.${event.indexv}`);
-      
+
       this.emit('slideChanged', {
         previousSlide: event.previousSlide,
         currentSlide: event.currentSlide,
@@ -335,7 +334,7 @@ class PresentationTemplate {
           const themes = ['starship', 'corporate', 'academic', 'minimal'];
           const currentIndex = themes.indexOf(this.config.theme.name);
           const nextIndex = (currentIndex + 1) % themes.length;
-          this.switchTheme(themes[nextIndex]);
+          this.switchTheme(themes[nextIndex] as string);
         }
       );
     }
@@ -389,15 +388,19 @@ function getConfigFromDOM(): Partial<PresentationConfig> {
 
   // Check reveal container for data attributes
   const revealElement = document.querySelector('.reveal');
-  if (revealElement) {
+  if (revealElement instanceof HTMLElement) {
     const dataset = revealElement.dataset;
-    
+
     if (dataset.theme) {
       config.theme = { name: dataset.theme, variant: 'default' };
     }
-    
+
     if (dataset.title) {
-      config.metadata = { ...config.metadata, title: dataset.title };
+      config.metadata = {
+        title: dataset.title,
+        author: (config.metadata && (config.metadata as any).author) || 'Author',
+        description: (config.metadata && (config.metadata as any).description) || ''
+      } as any;
     }
   }
 
