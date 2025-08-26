@@ -71,7 +71,7 @@
       background: var(--surface-hover);
     }
     
-    @include active {
+    @include active-state {
       transform: scale(1.05);
     }
     

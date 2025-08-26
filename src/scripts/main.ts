@@ -13,7 +13,7 @@ import '../styles/main.scss';
 import { PresentationConfig } from './config/types';
 import { createRevealConfig } from './config/reveal-config';
 import { initializeCharts } from './plugins/chart-integration';
-import { initializeThemeSystem } from './plugins/theme-switcher';
+import { initializeThemeSystem, getStoredTheme } from './plugins/theme-switcher';
 import { initializeAccessibility } from './utils/accessibility';
 import { initializePerformanceMonitoring } from './utils/performance';
 
@@ -81,6 +81,11 @@ class PresentationTemplate {
 
       // Initialize theme system
       if (this.config.features.themeSystem) {
+        // Check for stored theme preference
+        const storedTheme = getStoredTheme();
+        if (storedTheme) {
+          this.config.theme.name = storedTheme;
+        }
         initializeThemeSystem(this.config.theme);
       }
 

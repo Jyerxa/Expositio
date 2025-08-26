@@ -1,6 +1,7 @@
 export interface ThemeConfig {
     name: string;
     variant: string;
+    customColors?: Record<string, string>;
 }
 
 export interface MetadataConfig {

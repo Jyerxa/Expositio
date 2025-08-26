@@ -325,7 +325,7 @@
         0 10px 30px rgba(77, 208, 225, 0.4);
     }
     
-    @include active {
+    @include active-state {
       transform: translateY(0) scale(1.02);
     }
   }
