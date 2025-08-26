@@ -2,53 +2,91 @@
 
 // Responsive Breakpoints Mixin
 @mixin respond-to($breakpoint) {
-  @if $breakpoint == xs {
-    @media (min-width: 0) { @content; }
+  @if $breakpoint ==xs {
+    @media (min-width: 0) {
+      @content;
+    }
   }
-  @if $breakpoint == sm {
-    @media (min-width: 576px) { @content; }
+
+  @if $breakpoint ==sm {
+    @media (min-width: 576px) {
+      @content;
+    }
   }
-  @if $breakpoint == md {
-    @media (min-width: 768px) { @content; }
+
+  @if $breakpoint ==md {
+    @media (min-width: 768px) {
+      @content;
+    }
   }
-  @if $breakpoint == lg {
-    @media (min-width: 992px) { @content; }
+
+  @if $breakpoint ==lg {
+    @media (min-width: 992px) {
+      @content;
+    }
   }
-  @if $breakpoint == xl {
-    @media (min-width: 1200px) { @content; }
+
+  @if $breakpoint ==xl {
+    @media (min-width: 1200px) {
+      @content;
+    }
   }
-  @if $breakpoint == xxl {
-    @media (min-width: 1400px) { @content; }
+
+  @if $breakpoint ==xxl {
+    @media (min-width: 1400px) {
+      @content;
+    }
   }
 }
 
 // Max-width responsive mixin
 @mixin respond-down($breakpoint) {
-  @if $breakpoint == sm {
-    @media (max-width: 575.98px) { @content; }
+  @if $breakpoint ==sm {
+    @media (max-width: 575.98px) {
+      @content;
+    }
   }
-  @if $breakpoint == md {
-    @media (max-width: 767.98px) { @content; }
+
+  @if $breakpoint ==md {
+    @media (max-width: 767.98px) {
+      @content;
+    }
   }
-  @if $breakpoint == lg {
-    @media (max-width: 991.98px) { @content; }
+
+  @if $breakpoint ==lg {
+    @media (max-width: 991.98px) {
+      @content;
+    }
   }
-  @if $breakpoint == xl {
-    @media (max-width: 1199.98px) { @content; }
+
+  @if $breakpoint ==xl {
+    @media (max-width: 1199.98px) {
+      @content;
+    }
   }
-  @if $breakpoint == xxl {
-    @media (max-width: 1399.98px) { @content; }
+
+  @if $breakpoint ==xxl {
+    @media (max-width: 1399.98px) {
+      @content;
+    }
+  }
+}
+
+// Min-width responsive alias for clarity
+@mixin respond-up($breakpoint) {
+  @include respond-to($breakpoint) {
+    @content;
   }
 }
 
 // Viewport-based responsive sizing
 @mixin responsive-size($property, $min-size, $max-size, $min-vw: 320px, $max-vw: 1200px) {
   #{$property}: $min-size;
-  
+
   @media (min-width: #{$min-vw}) {
     #{$property}: calc(#{$min-size} + (#{strip-unit($max-size - $min-size)}) * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
   }
-  
+
   @media (min-width: #{$max-vw}) {
     #{$property}: $max-size;
   }
@@ -56,9 +94,10 @@
 
 // Strip unit helper function
 @function strip-unit($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
+  @if type-of($number)=='number' and not unitless($number) {
     @return $number / ($number * 0 + 1);
   }
+
   @return $number;
 }
 
@@ -81,7 +120,7 @@
 
 // Advanced glow with multiple layers
 @mixin multi-glow($color, $spread: 12px, $intensity: 0.2) {
-  box-shadow: 
+  box-shadow:
     0 0 ($spread * 0.5) rgba($color, $intensity * 2),
     0 0 $spread rgba($color, $intensity),
     0 0 ($spread * 2) rgba($color, $intensity * 0.5);
@@ -109,6 +148,7 @@
 
 // Hover and focus states
 @mixin hover-focus {
+
   &:hover,
   &:focus {
     @content;
@@ -117,6 +157,7 @@
 
 // Active state
 @mixin active {
+
   &:active,
   &.active {
     @content;
@@ -179,13 +220,13 @@
 
 // High DPI / Retina support
 @mixin retina {
-  @media 
-    only screen and (-webkit-min-device-pixel-ratio: 2),
-    only screen and (min--moz-device-pixel-ratio: 2),
-    only screen and (-o-min-device-pixel-ratio: 2/1),
-    only screen and (min-device-pixel-ratio: 2),
-    only screen and (min-resolution: 192dpi),
-    only screen and (min-resolution: 2dppx) {
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+  only screen and (min--moz-device-pixel-ratio: 2),
+  only screen and (-o-min-device-pixel-ratio: 2/1),
+  only screen and (min-device-pixel-ratio: 2),
+  only screen and (min-resolution: 192dpi),
+  only screen and (min-resolution: 2dppx) {
     @content;
   }
 }
@@ -198,9 +239,9 @@
 // Slide transition effects
 @mixin slide-in($direction: left, $distance: 20px) {
   opacity: 0;
-  transform: translateX(if($direction == left, -$distance, $distance));
+  transform: translateX(if($direction ==left, -$distance, $distance));
   transition: opacity var(--transition-slow), transform var(--transition-slow);
-  
+
   &.visible {
     opacity: 1;
     transform: translateX(0);
@@ -211,7 +252,7 @@
   opacity: 0;
   transform: translateY($distance);
   transition: opacity var(--transition-slow), transform var(--transition-slow);
-  
+
   &.visible {
     opacity: 1;
     transform: translateY(0);
@@ -232,14 +273,14 @@
 // Aspect ratio (fallback for older browsers)
 @mixin aspect-ratio($width, $height) {
   aspect-ratio: #{$width} / #{$height};
-  
+
   // Fallback for older browsers
   @supports not (aspect-ratio: 1 / 1) {
     position: relative;
     height: 0;
     padding-bottom: percentage($height / $width);
-    
-    & > * {
+
+    &>* {
       position: absolute;
       top: 0;
       left: 0;
