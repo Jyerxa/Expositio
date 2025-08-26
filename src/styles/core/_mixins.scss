@@ -146,14 +146,16 @@
   border: 0;
 }
 
-// Hover and focus states
+// Hover and focus states mixin
+@mixin hover-focus {
   &:hover,
   &:focus {
     @content;
   }
 }
 
-// Active state
+// Active state mixin
+@mixin active-state {
   &:active,
   &.active {
     @content;

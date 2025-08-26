@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import legacy from '@vitejs/plugin-legacy';
 import autoprefixer from 'autoprefixer';
 
 export default defineConfig(({ command }) => ({
@@ -82,14 +81,8 @@ export default defineConfig(({ command }) => ({
       include: ['src/**/*'],
       exclude: ['**/*.test.ts', '**/*.spec.ts'],
       rollupTypes: true
-    }),
-    ...(command === 'build'
-      ? [
-        legacy({
-          targets: ['defaults', 'not IE 11']
-        })
-      ]
-      : [])
+    })
+    // Note: legacy plugin removed as it doesn't support library mode
   ],
 
   // Path resolution
