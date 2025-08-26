@@ -1,0 +1,152 @@
+<nav class="presentation-navigation" data-theme="{{theme}}" aria-label="Presentation navigation">
+  <!-- Main navigation controls -->
+  <div class="nav-controls">
+    <div class="nav-group nav-primary">
+      <button class="nav-button nav-prev" 
+              aria-label="Previous slide" 
+              data-nav="prev"
+              title="Previous slide (← or ↑)">
+        <span class="nav-icon">◀</span>
+        <span class="nav-text">Previous</span>
+      </button>
+      
+      <button class="nav-button nav-next" 
+              aria-label="Next slide" 
+              data-nav="next"
+              title="Next slide (→ or ↓)">
+        <span class="nav-text">Next</span>
+        <span class="nav-icon">▶</span>
+      </button>
+    </div>
+    
+    <div class="nav-group nav-secondary">
+      <button class="nav-button nav-first" 
+              aria-label="Go to first slide" 
+              data-nav="first"
+              title="First slide (Home)">
+        <span class="nav-icon">⇤</span>
+        <span class="nav-text">First</span>
+      </button>
+      
+      <button class="nav-button nav-last" 
+              aria-label="Go to last slide" 
+              data-nav="last"
+              title="Last slide (End)">
+        <span class="nav-text">Last</span>
+        <span class="nav-icon">⇥</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Slide overview and jump navigation -->
+  <div class="nav-overview">
+    <button class="nav-button nav-overview-toggle" 
+            aria-label="Toggle overview mode" 
+            data-nav="overview"
+            title="Overview mode (O)">
+      <span class="nav-icon">⊞</span>
+      <span class="nav-text">Overview</span>
+    </button>
+    
+    <div class="slide-counter">
+      <input type="number" 
+             class="slide-jump" 
+             min="1" 
+             max="{{totalSlides}}" 
+             value="{{currentSlide}}"
+             aria-label="Jump to slide number"
+             title="Enter slide number to jump to">
+      <span class="counter-separator">/</span>
+      <span class="total-counter">{{totalSlides}}</span>
+    </div>
+  </div>
+  
+  <!-- Additional controls -->
+  <div class="nav-utilities">
+    <button class="nav-button nav-speaker-notes" 
+            aria-label="Toggle speaker notes" 
+            data-nav="notes"
+            title="Speaker notes (S)">
+      <span class="nav-icon">📝</span>
+      <span class="nav-text">Notes</span>
+    </button>
+    
+    <button class="nav-button nav-help" 
+            aria-label="Show keyboard shortcuts" 
+            data-nav="help"
+            title="Keyboard shortcuts (?)">
+      <span class="nav-icon">?</span>
+      <span class="nav-text">Help</span>
+    </button>
+    
+    <button class="nav-button nav-fullscreen" 
+            aria-label="Toggle fullscreen" 
+            data-nav="fullscreen"
+            title="Fullscreen (F)">
+      <span class="nav-icon">⛶</span>
+      <span class="nav-text">Fullscreen</span>
+    </button>
+  </div>
+  
+  <!-- Progress indicator -->
+  <div class="nav-progress">
+    <div class="progress-track">
+      <div class="progress-indicator" style="width: {{progressPercentage}}%"></div>
+    </div>
+    <div class="progress-text">
+      <span class="progress-current">{{currentSlide}}</span>
+      <span class="progress-total">{{totalSlides}}</span>
+    </div>
+  </div>
+</nav>
+
+<!-- Keyboard shortcuts overlay -->
+<div class="keyboard-shortcuts-overlay" data-shortcuts-visible="false">
+  <div class="shortcuts-content">
+    <h3>Keyboard Shortcuts</h3>
+    <div class="shortcuts-grid">
+      <div class="shortcut-group">
+        <h4>Navigation</h4>
+        <div class="shortcut-item">
+          <kbd>←</kbd><kbd>↑</kbd> <span>Previous slide</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>→</kbd><kbd>↓</kbd><kbd>Space</kbd> <span>Next slide</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Home</kbd> <span>First slide</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>End</kbd> <span>Last slide</span>
+        </div>
+      </div>
+      
+      <div class="shortcut-group">
+        <h4>Modes</h4>
+        <div class="shortcut-item">
+          <kbd>O</kbd> <span>Overview mode</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>S</kbd> <span>Speaker notes</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>F</kbd> <span>Fullscreen</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>T</kbd> <span>Theme toggle</span>
+        </div>
+      </div>
+      
+      <div class="shortcut-group">
+        <h4>Other</h4>
+        <div class="shortcut-item">
+          <kbd>?</kbd> <span>Show/hide shortcuts</span>
+        </div>
+        <div class="shortcut-item">
+          <kbd>Esc</kbd> <span>Exit mode</span>
+        </div>
+      </div>
+    </div>
+    <button class="shortcuts-close" data-shortcuts-close>Close</button>
+  </div>
+</div>

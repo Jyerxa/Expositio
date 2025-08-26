@@ -1,0 +1,35 @@
+<section class="code-slide">
+  <div class="slide-header">
+    <h2 class="slide-title">{{title}}</h2>
+    <div class="slide-number">{{slideNumber}}</div>
+  </div>
+  
+  <div class="code-content">
+    <div class="code-header">
+      <div class="code-title">{{codeTitle}}</div>
+      <div class="code-language">{{language}}</div>
+      <div class="code-actions">
+        <button class="copy-button" data-copy-target="code-{{codeId}}">
+          <span class="copy-icon">📋</span>
+          Copy
+        </button>
+      </div>
+    </div>
+    
+    <div class="code-wrapper">
+      <pre class="code-block"><code id="code-{{codeId}}" class="language-{{language}}" data-trim data-line-numbers="{{lineNumbers}}">{{code}}</code></pre>
+    </div>
+    
+    <!-- Optional explanation or notes -->
+    <div class="code-explanation" data-explanation="{{explanation}}">
+      <div class="explanation-content">
+        {{explanation}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="slide-footer">
+    <div class="footer-text">{{footerText}}</div>
+    <div class="slide-progress"></div>
+  </div>
+</section>

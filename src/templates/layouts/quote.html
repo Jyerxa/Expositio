@@ -1,0 +1,48 @@
+<section class="quote-slide" data-quote-style="{{quoteStyle}}">
+  <div class="slide-header">
+    <h2 class="slide-title">{{title}}</h2>
+    <div class="slide-number">{{slideNumber}}</div>
+  </div>
+  
+  <div class="quote-content">
+    <div class="quote-wrapper">
+      <div class="quote-mark quote-mark-open">"</div>
+      
+      <blockquote class="quote-text">
+        {{quote}}
+      </blockquote>
+      
+      <div class="quote-mark quote-mark-close">"</div>
+    </div>
+    
+    <div class="quote-attribution">
+      <div class="author-info">
+        <div class="author-photo" data-photo="{{authorPhoto}}" aria-hidden="true">
+          <img src="{{authorPhoto}}" alt="{{authorName}}" class="author-image">
+        </div>
+        <div class="author-details">
+          <cite class="author-name">{{authorName}}</cite>
+          <p class="author-title">{{authorTitle}}</p>
+          <p class="author-company">{{authorCompany}}</p>
+        </div>
+      </div>
+      
+      <!-- Optional source or context -->
+      <div class="quote-source" data-source="{{source}}">
+        <p class="source-text">{{source}}</p>
+        <p class="quote-date">{{quoteDate}}</p>
+      </div>
+    </div>
+    
+    <!-- Optional decorative elements -->
+    <div class="quote-decoration">
+      <div class="decoration-element decoration-1"></div>
+      <div class="decoration-element decoration-2"></div>
+    </div>
+  </div>
+  
+  <div class="slide-footer">
+    <div class="footer-text">{{footerText}}</div>
+    <div class="slide-progress"></div>
+  </div>
+</section>

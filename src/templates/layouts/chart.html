@@ -1,0 +1,54 @@
+<section class="chart-slide">
+  <div class="slide-header">
+    <h2 class="slide-title">{{title}}</h2>
+    <div class="slide-number">{{slideNumber}}</div>
+  </div>
+  
+  <div class="chart-content">
+    <div class="chart-wrapper">
+      <div class="chart-container" 
+           data-chart-type="{{chartType}}" 
+           data-chart-config="{{chartConfig}}"
+           data-chart-responsive="{{responsive}}"
+           style="height: {{height}}; max-height: {{maxHeight}};">
+        <canvas id="chart-{{chartId}}" 
+                aria-label="{{chartDescription}}"
+                role="img">
+          <!-- Fallback content for accessibility -->
+          <div class="chart-fallback">
+            <p>{{chartDescription}}</p>
+            <table class="chart-data-table">
+              {{chartDataTable}}
+            </table>
+          </div>
+        </canvas>
+      </div>
+      
+      <!-- Chart legend and controls -->
+      <div class="chart-controls">
+        <div class="chart-legend" id="legend-{{chartId}}"></div>
+        <div class="chart-actions">
+          <button class="chart-toggle" data-target="chart-{{chartId}}">
+            Toggle Data
+          </button>
+          <button class="chart-export" data-target="chart-{{chartId}}">
+            Export
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Optional chart description or insights -->
+    <div class="chart-insights" data-insights="{{insights}}">
+      <h3 class="insights-title">Key Insights</h3>
+      <div class="insights-content">
+        {{insights}}
+      </div>
+    </div>
+  </div>
+  
+  <div class="slide-footer">
+    <div class="footer-text">{{footerText}}</div>
+    <div class="slide-progress"></div>
+  </div>
+</section>

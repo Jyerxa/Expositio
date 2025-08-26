@@ -10,12 +10,17 @@
 import '../styles/main.scss';
 
 // Import types and configurations
-import { PresentationConfig } from './config/types';
-import { createRevealConfig } from './config/reveal-config';
-import { initializeCharts } from './plugins/chart-integration';
-import { initializeThemeSystem } from './plugins/theme-switcher';
-import { initializeAccessibility } from './utils/accessibility';
-import { initializePerformanceMonitoring } from './utils/performance';
+import { 
+  PresentationConfig, 
+  DEFAULT_FEATURE_FLAGS, 
+  DEFAULT_EXPORT_CONFIG,
+  DEFAULT_CHART_CONFIG,
+  DEFAULT_CODE_CONFIG,
+  PerformanceMetrics
+} from './config/types.js';
+import { RevealConfigManager } from './config/reveal-config.js';
+import { ThemeManager } from './config/theme-config.js';
+import { ChartConfigManager } from './config/chart-config.js';
 
 // Import Reveal.js and plugins
 import Reveal from 'reveal.js';
@@ -24,6 +29,9 @@ import Highlight from 'reveal.js/plugin/highlight/highlight.esm.js';
 import Notes from 'reveal.js/plugin/notes/notes.esm.js';
 import Zoom from 'reveal.js/plugin/zoom/zoom.esm.js';
 import Search from 'reveal.js/plugin/search/search.esm.js';
+
+// Import Reveal.js CSS
+import 'reveal.js/dist/reveal.css';
 
 // Global constants
 const VERSION: string = (typeof __VERSION__ !== 'undefined' && __VERSION__) || '2.0.0';
@@ -51,9 +59,30 @@ class PresentationTemplate {
   private reveal: typeof Reveal | null = null;
   private config: PresentationConfig;
   private isInitialized = false;
+  private themeManager: ThemeManager;
+  private revealConfigManager: RevealConfigManager;
+  private chartConfigManager: ChartConfigManager;
+  private performanceMetrics: PerformanceMetrics;
+  private startTime: number;
 
   constructor(config: Partial<PresentationConfig> = {}) {
+    this.startTime = performance.now();
     this.config = this.mergeConfig(config);
+    
+    // Initialize configuration managers
+    this.themeManager = new ThemeManager(this.config.theme);
+    this.revealConfigManager = new RevealConfigManager(this.config.features);
+    this.chartConfigManager = new ChartConfigManager(this.config.charts);
+    
+    // Initialize performance metrics
+    this.performanceMetrics = {
+      initializationTime: 0,
+      firstSlideTime: 0,
+      totalSlides: 0,
+      loadedAssets: 0,
+      renderTime: []
+    };
+    
     logger.info('PresentationTemplate initialized with config:', this.config);
   }
 
@@ -69,47 +98,34 @@ class PresentationTemplate {
     try {
       logger.info('Starting presentation initialization...');
 
-      // Initialize performance monitoring
-      if (this.config.features.performanceMonitoring) {
-        initializePerformanceMonitoring();
-      }
-
-      // Initialize accessibility features
-      if (this.config.features.accessibility) {
-        initializeAccessibility();
-      }
-
       // Initialize theme system
       if (this.config.features.themeSystem) {
-        initializeThemeSystem(this.config.theme);
+        await this.themeManager.setTheme(this.config.theme.name, this.config.theme.variant);
       }
 
       // Create Reveal.js configuration
-      const revealConfig = createRevealConfig(this.config);
+      const revealConfig = this.revealConfigManager.getConfig();
 
       // Initialize Reveal.js
-      this.reveal = Reveal.initialize({
+      const RevealInstance = Reveal || (window as any).Reveal;
+      if (!RevealInstance) {
+        throw new Error('Reveal.js is not available - ensure Reveal.js is loaded before this script');
+      }
+      
+      await RevealInstance.initialize({
         ...revealConfig,
-        plugins: [
-          Markdown,
-          Highlight,
-          Notes,
-          Zoom,
-          Search
-        ]
+        plugins: this.getActivePlugins()
       });
 
-      // Wait for Reveal.js to be ready
-      await new Promise<void>((resolve) => {
-        Reveal.on('ready', () => {
-          logger.info('Reveal.js ready');
-          resolve();
-        });
-      });
+      // Reveal.js is now ready
+      this.reveal = RevealInstance;
+      this.performanceMetrics.firstSlideTime = performance.now() - this.startTime;
+      this.performanceMetrics.totalSlides = RevealInstance.getTotalSlides();
+      logger.info('Reveal.js ready');
 
       // Initialize charts if enabled
       if (this.config.features.charts) {
-        await initializeCharts(this.config.chart);
+        this.initializeCharts();
       }
 
       // Set up custom event listeners
@@ -118,13 +134,17 @@ class PresentationTemplate {
       // Set up custom keyboard shortcuts
       this.setupKeyboardShortcuts();
 
+      // Finalize performance metrics
+      this.performanceMetrics.initializationTime = performance.now() - this.startTime;
+
       this.isInitialized = true;
       logger.info('Presentation initialization complete');
 
       // Emit ready event
       this.emit('presentationReady', {
         version: VERSION,
-        config: this.config
+        config: this.config,
+        metrics: this.performanceMetrics
       });
 
     } catch (error) {
@@ -158,14 +178,70 @@ class PresentationTemplate {
   /**
    * Switch to a different theme
    */
-  switchTheme(themeName: string): void {
+  async switchTheme(themeName: string, variant: string = 'default'): Promise<void> {
     if (this.config.features.themeSystem) {
-      this.config.theme.name = themeName;
-      initializeThemeSystem(this.config.theme);
-      logger.info(`Switched to theme: ${themeName}`);
+      try {
+        await this.themeManager.setTheme(themeName, variant);
+        this.config.theme.name = themeName;
+        this.config.theme.variant = variant;
+        logger.info(`Switched to theme: ${themeName} (${variant})`);
+      } catch (error) {
+        logger.error(`Failed to switch theme: ${error}`);
+        throw error;
+      }
     } else {
       logger.warn('Theme system is disabled');
     }
+  }
+
+  /**
+   * Get performance metrics
+   */
+  getMetrics(): PerformanceMetrics {
+    return { ...this.performanceMetrics };
+  }
+
+  /**
+   * Get active Reveal.js plugins based on configuration
+   */
+  private getActivePlugins(): any[] {
+    const plugins: any[] = [Markdown];
+
+    if (this.config.features.codeHighlighting) {
+      plugins.push(Highlight);
+    }
+
+    if (this.config.features.speakerNotes) {
+      plugins.push(Notes);
+    }
+
+    if (this.config.features.zoom) {
+      plugins.push(Zoom);
+    }
+
+    // Always include Search for now
+    plugins.push(Search);
+
+    return plugins;
+  }
+
+  /**
+   * Initialize charts in the presentation
+   */
+  private initializeCharts(): void {
+    const chartContainers = document.querySelectorAll('[data-chart-type]');
+    chartContainers.forEach((container) => {
+      const chartType = container.getAttribute('data-chart-type');
+      const chartId = container.getAttribute('id') || `chart-${Date.now()}`;
+      
+      if (chartType) {
+        logger.info(`Initializing chart: ${chartType} in container: ${chartId}`);
+        // Chart initialization would happen here with Chart.js
+        // For now, we just log the configuration
+        const chartConfig = this.chartConfigManager.getChartJSConfig();
+        console.log('Chart configuration:', chartConfig);
+      }
+    });
   }
 
   /**
@@ -174,8 +250,8 @@ class PresentationTemplate {
   destroy(): void {
     if (this.reveal) {
       // Remove event listeners
-      Reveal.off('slidechanged');
-      Reveal.off('ready');
+      this.reveal.off('slidechanged');
+      this.reveal.off('ready');
 
       // Destroy Reveal.js
       // Note: Reveal.js doesn't have a native destroy method
@@ -202,62 +278,19 @@ class PresentationTemplate {
    */
   private mergeConfig(config: Partial<PresentationConfig>): PresentationConfig {
     const defaultConfig: PresentationConfig = {
+      template: {
+        title: 'My Professional Presentation',
+        author: 'Author Name',
+        description: 'A professional presentation built with Expositio'
+      },
       theme: {
         name: 'starship',
         variant: 'default'
       },
-      metadata: {
-        title: 'My Presentation',
-        author: 'Author Name',
-        description: 'A professional presentation'
-      },
-      features: {
-        navigation: true,
-        progress: true,
-        slideNumbers: true,
-        speakerNotes: false,
-        overview: true,
-        zoom: true,
-        charts: false,
-        themeSystem: true,
-        accessibility: true,
-        performanceMonitoring: IS_DEV
-      },
-      reveal: {
-        controls: true,
-        progress: true,
-        slideNumber: true,
-        history: true,
-        keyboard: true,
-        overview: true,
-        center: true,
-        touch: true,
-        loop: false,
-        rtl: false,
-        shuffle: false,
-        fragments: true,
-        embedded: false,
-        help: true,
-        showNotes: false,
-        autoPlayMedia: null,
-        autoSlide: 0,
-        autoSlideStoppable: true,
-        mouseWheel: false,
-        hideAddressBar: true,
-        previewLinks: false,
-        transition: 'slide',
-        transitionSpeed: 'default',
-        backgroundTransition: 'fade',
-        viewDistance: 3,
-        display: 'block'
-      },
-      chart: {
-        provider: 'chartjs',
-        globalOptions: {
-          responsive: true,
-          maintainAspectRatio: true
-        }
-      }
+      features: DEFAULT_FEATURE_FLAGS,
+      export: DEFAULT_EXPORT_CONFIG,
+      charts: DEFAULT_CHART_CONFIG,
+      code: DEFAULT_CODE_CONFIG
     };
 
     return this.deepMerge(defaultConfig, config);
@@ -287,7 +320,7 @@ class PresentationTemplate {
     if (!this.reveal) return;
 
     // Slide change events
-    Reveal.on('slidechanged', (event: { previousSlide: Element; currentSlide: Element; indexh: number; indexv: number }) => {
+    this.reveal.on('slidechanged', (event: { previousSlide: Element; currentSlide: Element; indexh: number; indexv: number }) => {
       logger.info(`Slide changed to: ${event.indexh}.${event.indexv}`);
 
       this.emit('slideChanged', {
@@ -299,12 +332,12 @@ class PresentationTemplate {
     });
 
     // Fragment events
-    Reveal.on('fragmentshown', (event: { fragment: Element }) => {
+    this.reveal.on('fragmentshown', (event: { fragment: Element }) => {
       logger.info('Fragment shown');
       this.emit('fragmentShown', { fragment: event.fragment });
     });
 
-    Reveal.on('fragmenthidden', (event: { fragment: Element }) => {
+    this.reveal.on('fragmenthidden', (event: { fragment: Element }) => {
       logger.info('Fragment hidden');
       this.emit('fragmentHidden', { fragment: event.fragment });
     });
@@ -317,24 +350,27 @@ class PresentationTemplate {
     if (!this.reveal) return;
 
     // Custom keyboard shortcuts
-    Reveal.addKeyBinding(
+    this.reveal.addKeyBinding(
       { keyCode: 72, key: 'H', description: 'Go to first slide' },
       () => {
-        Reveal.slide(0, 0);
+        this.reveal?.slide(0, 0);
         logger.info('Navigated to first slide via keyboard shortcut');
       }
     );
 
     // Theme switcher shortcut (T key)
     if (this.config.features.themeSystem) {
-      Reveal.addKeyBinding(
+      this.reveal.addKeyBinding(
         { keyCode: 84, key: 'T', description: 'Toggle theme' },
-        () => {
+        async () => {
           // Cycle through available themes
-          const themes = ['starship', 'corporate', 'academic', 'minimal'];
+          const themes = this.themeManager.getAvailableThemes();
           const currentIndex = themes.indexOf(this.config.theme.name);
           const nextIndex = (currentIndex + 1) % themes.length;
-          this.switchTheme(themes[nextIndex] as string);
+          const nextTheme = themes[nextIndex];
+          if (nextTheme) {
+            await this.switchTheme(nextTheme);
+          }
         }
       );
     }
@@ -382,8 +418,8 @@ function getConfigFromDOM(): Partial<PresentationConfig> {
   const config: Partial<PresentationConfig> = {};
 
   // Check for global configuration
-  if (typeof window !== 'undefined' && (window as any).PRESENTATION_CONFIG) {
-    Object.assign(config, (window as any).PRESENTATION_CONFIG);
+  if (typeof window !== 'undefined' && (window as any).EXPOSITIO_CONFIG) {
+    Object.assign(config, (window as any).EXPOSITIO_CONFIG);
   }
 
   // Check reveal container for data attributes
@@ -392,15 +428,25 @@ function getConfigFromDOM(): Partial<PresentationConfig> {
     const dataset = revealElement.dataset;
 
     if (dataset.theme) {
-      config.theme = { name: dataset.theme, variant: 'default' };
+      config.theme = { name: dataset.theme, variant: dataset.themeVariant || 'default' };
     }
 
-    if (dataset.title) {
-      config.metadata = {
-        title: dataset.title,
-        author: (config.metadata && (config.metadata as any).author) || 'Author',
-        description: (config.metadata && (config.metadata as any).description) || ''
-      } as any;
+    if (dataset.title || dataset.author || dataset.description) {
+      config.template = {
+        title: dataset.title || 'My Presentation',
+        author: dataset.author || 'Author Name',
+        description: dataset.description || ''
+      };
+    }
+
+    // Feature flags from data attributes
+    if (dataset.features) {
+      try {
+        const features = JSON.parse(dataset.features);
+        config.features = features;
+      } catch (e) {
+        logger.warn('Invalid features configuration in data-features attribute');
+      }
     }
   }
 
