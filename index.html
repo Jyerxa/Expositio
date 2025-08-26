@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>My Presentation</title>
-    
+
     <!-- Reveal.js CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/black.min.css" id="theme">
-    
+
     <!-- Code syntax highlighting -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/monokai.min.css">
-    
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/monokai.min.css">
+
     <!-- Custom styles -->
     <link rel="stylesheet" href="custom.css">
 </head>
+
 <body>
     <div class="reveal">
         <div class="slides">
             <!-- Title Slide -->
-            <section data-background="radial-gradient(ellipse at center, rgba(0, 102, 255, 0.15) 0%, rgba(5, 8, 16, 0.95) 100%)">
+            <section
+                data-background="radial-gradient(ellipse at center, rgba(0, 102, 255, 0.15) 0%, rgba(5, 8, 16, 0.95) 100%)">
                 <h1>NEURAL INTERFACE</h1>
                 <h3>Advanced Systems Protocol</h3>
                 <p>
@@ -58,7 +62,8 @@
             <section>
                 <h2>Holographic Media Array</h2>
                 <p>Advanced projection systems render immersive content</p>
-                <img src="https://via.placeholder.com/600x300/4dd0e1/0a0f1c?text=HOLOGRAPHIC+DISPLAY" alt="Holographic Display" style="border: none;">
+                <img src="https://via.placeholder.com/600x300/4dd0e1/0a0f1c?text=HOLOGRAPHIC+DISPLAY"
+                    alt="Holographic Display" style="border: none;">
                 <p><small>Enhanced with quantum visual processing</small></p>
             </section>
 
@@ -108,7 +113,8 @@ initializeSystem({ name: "Bridge Command" });
             </section>
 
             <!-- Quote Slide -->
-            <section data-background="linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(108, 92, 231, 0.08) 100%)">
+            <section
+                data-background="linear-gradient(135deg, rgba(0, 212, 255, 0.08) 0%, rgba(108, 92, 231, 0.08) 100%)">
                 <blockquote>
                     "The best way to predict the future is to invent it."
                 </blockquote>
@@ -116,7 +122,8 @@ initializeSystem({ name: "Bridge Command" });
             </section>
 
             <!-- Thank You Slide -->
-            <section data-background="radial-gradient(ellipse at center, rgba(0, 184, 169, 0.15) 0%, rgba(5, 8, 16, 0.95) 100%)">
+            <section
+                data-background="radial-gradient(ellipse at center, rgba(0, 184, 169, 0.15) 0%, rgba(5, 8, 16, 0.95) 100%)">
                 <h1>TRANSMISSION COMPLETE</h1>
                 <p>NEURAL LINK STATUS: ACTIVE</p>
                 <p>
@@ -136,11 +143,12 @@ initializeSystem({ name: "Bridge Command" });
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/zoom/zoom.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/search/search.min.js"></script>
-    
+
     <!-- Chart.js for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Initialization Script -->
-    <script src="presentation.js"></script>
+
+    <!-- Load Expositio library (UMD) to enable theme switching and features -->
+    <script src="./dist/main.umd.js"></script>
 </body>
+
 </html>

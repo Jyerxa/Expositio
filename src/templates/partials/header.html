@@ -1,0 +1,33 @@
+<header class="slide-header-partial" data-theme="{{theme}}">
+  <div class="header-branding">
+    <div class="logo-container" data-logo="{{logo}}">
+      <img src="{{logo}}" alt="{{logoAlt}}" class="header-logo">
+    </div>
+    <div class="brand-text">
+      <h1 class="presentation-brand">{{brandName}}</h1>
+      <p class="presentation-tagline">{{tagline}}</p>
+    </div>
+  </div>
+  
+  <div class="header-meta">
+    <div class="presentation-info">
+      <span class="presentation-author">{{author}}</span>
+      <span class="presentation-date">{{date}}</span>
+    </div>
+    <div class="header-controls">
+      <button class="theme-toggle" aria-label="Toggle theme" data-theme-toggle>
+        <span class="theme-icon">🌓</span>
+      </button>
+      <button class="fullscreen-toggle" aria-label="Toggle fullscreen" data-fullscreen-toggle>
+        <span class="fullscreen-icon">⛶</span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Progress indicator -->
+  <div class="header-progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+      <div class="progress-fill"></div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,479 @@
+// Minimal Theme - Clean, Distraction-Free Design
+// Pure, minimal aesthetic focused on content and readability
+
+.reveal.theme-minimal {
+  // Monochromatic Color Palette
+  --primary-color: #000000; // Pure black
+  --secondary-color: #333333; // Dark gray
+  --accent-color: #666666; // Medium gray
+  --success-color: #2d3748; // Dark slate
+  --warning-color: #4a5568; // Warm gray
+  --error-color: #1a202c; // Darker slate
+  
+  // Minimal Neutral Colors
+  --background-primary: #ffffff; // Pure white
+  --background-secondary: #fafafa; // Off-white
+  --background-tertiary: #f0f0f0; // Light gray
+  --text-primary: #000000; // Pure black
+  --text-secondary: #333333; // Dark gray
+  --text-muted: #666666; // Medium gray
+  
+  // Minimal Typography - Single, clean font family
+  --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', 'Liberation Mono', monospace;
+  
+  // Typography Scale - Clean and readable
+  --font-size-h1: clamp(2.5rem, 4vw, 3.25rem);
+  --font-size-h2: clamp(2rem, 3.25vw, 2.5rem);
+  --font-size-h3: clamp(1.5rem, 2.25vw, 1.875rem);
+  --font-size-body: clamp(1rem, 1.5vw, 1.125rem);
+  --font-size-small: clamp(0.875rem, 1.25vw, 1rem);
+  
+  // Font Weights - Limited range for consistency
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  
+  // Minimal Spacing - Clean proportions
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  // Layout - Generous whitespace
+  --content-max-width: 800px;
+  --slide-padding: var(--space-2xl);
+  --border-radius: 0; // No rounded corners
+  --border-radius-large: 0;
+  
+  // Minimal shadows - Very subtle or none
+  --shadow-sm: none;
+  --shadow-md: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  
+  // Background and Base Styles
+  background: var(--background-primary);
+  font-family: var(--font-family-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  
+  // Minimal Headings - No decorations
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: var(--space-lg);
+    
+    // No decorative elements
+    &::after {
+      display: none;
+    }
+  }
+  
+  h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-light);
+    letter-spacing: -0.025em;
+  }
+  
+  h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-normal);
+  }
+  
+  h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-medium);
+  }
+  
+  // Clean body text
+  p, li {
+    font-size: var(--font-size-body);
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+  
+  // Minimal emphasis
+  strong, b {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+  }
+  
+  em, i {
+    font-style: italic;
+    color: var(--text-primary);
+  }
+  
+  // Clean links - No underlines
+  a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    border-bottom: 1px solid var(--text-muted);
+    transition: border-color 0.2s ease;
+    
+    &:hover, &:focus {
+      border-bottom-color: var(--text-primary);
+    }
+  }
+  
+  // Minimal lists
+  ul, ol {
+    margin-left: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    
+    li {
+      margin-bottom: var(--space-sm);
+      
+      &::marker {
+        color: var(--text-muted);
+      }
+    }
+  }
+  
+  ul li {
+    list-style-type: disc;
+    
+    &::marker {
+      content: '•';
+      color: var(--text-muted);
+    }
+  }
+  
+  ol li::marker {
+    color: var(--text-muted);
+    font-weight: var(--font-weight-normal);
+  }
+  
+  // Clean slides - Maximum whitespace
+  .slides section {
+    background: var(--background-primary);
+    padding: var(--slide-padding);
+    
+    &.present {
+      transform: scale(1);
+    }
+  }
+  
+  // Minimal title slide
+  .title-slide {
+    background: var(--background-primary);
+    color: var(--text-primary);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-2xl);
+    
+    h1 {
+      color: var(--text-primary);
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-light);
+      margin-bottom: var(--space-xl);
+      letter-spacing: -0.025em;
+    }
+    
+    .presentation-subtitle {
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .title-meta {
+      font-size: var(--font-size-small);
+      color: var(--text-muted);
+      
+      .author, .date {
+        margin-bottom: var(--space-sm);
+        font-weight: var(--font-weight-normal);
+      }
+    }
+  }
+  
+  // Clean two-column layouts
+  .columns {
+    display: flex;
+    gap: var(--space-2xl);
+    align-items: flex-start;
+    margin: var(--space-xl) 0;
+    
+    .column {
+      flex: 1;
+      
+      h3 {
+        color: var(--text-primary);
+        margin-bottom: var(--space-lg);
+        font-weight: var(--font-weight-medium);
+      }
+    }
+  }
+  
+  // Minimal code blocks
+  pre, code {
+    font-family: var(--font-family-mono);
+    background: var(--background-secondary);
+  }
+  
+  pre {
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+    overflow-x: auto;
+    border: 1px solid var(--background-tertiary);
+    
+    code {
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+  }
+  
+  code {
+    padding: 0.25em 0.5em;
+    font-size: 0.9em;
+    color: var(--text-primary);
+  }
+  
+  // Clean charts
+  .chart-container {
+    background: var(--background-primary);
+    padding: var(--space-xl) 0;
+    margin: var(--space-xl) 0;
+  }
+  
+  // Minimal blockquotes
+  blockquote {
+    border-left: 2px solid var(--text-muted);
+    padding-left: var(--space-lg);
+    margin: var(--space-xl) 0;
+    font-style: italic;
+    font-size: var(--font-size-body);
+    color: var(--text-secondary);
+    
+    // No decorative quotes
+    &::before {
+      display: none;
+    }
+    
+    cite {
+      display: block;
+      margin-top: var(--space-md);
+      font-style: normal;
+      font-size: var(--font-size-small);
+      color: var(--text-muted);
+      
+      &::before {
+        content: '— ';
+      }
+    }
+  }
+  
+  // Minimal tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-xl) 0;
+    
+    th, td {
+      padding: var(--space-sm) 0;
+      text-align: left;
+      border-bottom: 1px solid var(--background-tertiary);
+    }
+    
+    th {
+      font-weight: var(--font-weight-medium);
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--text-muted);
+    }
+    
+    // No alternating row colors
+  }
+  
+  // Subtle fragment animations
+  .fragment {
+    &.fade-in {
+      opacity: 0;
+      
+      &.visible {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    }
+    
+    &.slide-up {
+      transform: translateY(10px);
+      opacity: 0;
+      
+      &.visible {
+        transform: translateY(0);
+        opacity: 1;
+        transition: all 0.3s ease;
+      }
+    }
+    
+    &.highlight-minimal {
+      &.visible {
+        background: var(--background-secondary);
+        transition: background 0.3s ease;
+      }
+    }
+  }
+  
+  // Minimal progress bar
+  .progress {
+    color: var(--text-muted);
+    
+    div {
+      background: var(--text-muted);
+    }
+  }
+  
+  // Clean controls
+  .controls {
+    color: var(--text-primary);
+    
+    button {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text-primary);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: var(--font-weight-normal);
+      transition: all 0.2s ease;
+      
+      &:hover, &:focus {
+        border-color: var(--text-primary);
+        background: var(--background-secondary);
+      }
+    }
+  }
+  
+  // Clean speaker notes
+  .speaker-notes {
+    background: var(--background-secondary);
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+    border-left: 2px solid var(--text-muted);
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+  }
+  
+  // Navigation - Minimal design
+  .presentation-navigation {
+    .nav-button {
+      background: transparent;
+      border: 1px solid var(--text-muted);
+      color: var(--text-primary);
+      padding: var(--space-xs) var(--space-sm);
+      font-size: var(--font-size-small);
+      
+      &:hover, &:focus {
+        border-color: var(--text-primary);
+        background: var(--background-secondary);
+      }
+    }
+    
+    .progress-indicator {
+      background: var(--text-muted);
+    }
+  }
+  
+  // Header and footer - Clean and minimal
+  .slide-header-partial {
+    border-bottom: 1px solid var(--background-tertiary);
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-xl);
+    
+    .header-logo {
+      max-height: 2rem;
+    }
+    
+    .theme-toggle, .fullscreen-toggle {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      
+      &:hover {
+        color: var(--text-primary);
+      }
+    }
+  }
+  
+  .slide-footer-partial {
+    border-top: 1px solid var(--background-tertiary);
+    padding-top: var(--space-md);
+    margin-top: var(--space-xl);
+    font-size: var(--font-size-small);
+    color: var(--text-muted);
+    
+    .footer-logo-image {
+      max-height: 1.5rem;
+    }
+    
+    .footer-line {
+      background: var(--background-tertiary);
+      height: 1px;
+    }
+    
+    .pattern-dot {
+      background: var(--text-muted);
+    }
+  }
+  
+  // Media queries
+  @media (max-width: 768px) {
+    --slide-padding: var(--space-xl);
+    
+    .columns {
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+    
+    .title-slide {
+      padding: var(--space-xl);
+    }
+  }
+  
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    --text-muted: #333333;
+    --background-tertiary: #e0e0e0;
+    
+    .controls button {
+      border-width: 2px;
+    }
+  }
+  
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .fragment {
+      &.fade-in,
+      &.slide-up {
+        transition: none;
+      }
+    }
+    
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+  
+  // Print styles
+  @media print {
+    background: white !important;
+    color: black !important;
+    
+    .controls,
+    .presentation-navigation,
+    .slide-header-partial,
+    .slide-footer-partial {
+      display: none !important;
+    }
+  }
+}

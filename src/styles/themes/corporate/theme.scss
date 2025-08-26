@@ -1,0 +1,364 @@
+// Corporate Theme - Professional Business Presentations
+// Sophisticated, trustworthy, and clean design for corporate environments
+
+.reveal.theme-corporate {
+  // Color Palette - Professional Blues, Grays, and Whites
+  --primary-color: #1e3a8a; // Deep corporate blue
+  --secondary-color: #3b82f6; // Lighter blue for accents
+  --accent-color: #0ea5e9; // Sky blue for highlights
+  --success-color: #10b981; // Professional green
+  --warning-color: #f59e0b; // Amber for caution
+  --error-color: #ef4444; // Red for alerts
+  
+  // Neutral Colors
+  --background-primary: #ffffff; // Pure white
+  --background-secondary: #f8fafc; // Light gray
+  --background-tertiary: #e2e8f0; // Medium gray
+  --text-primary: #1e293b; // Dark gray
+  --text-secondary: #64748b; // Medium gray
+  --text-muted: #94a3b8; // Light gray
+  
+  // Professional Typography
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  
+  // Typography Scale
+  --font-size-h1: clamp(2.5rem, 4vw, 3.5rem);
+  --font-size-h2: clamp(2rem, 3.5vw, 2.75rem);
+  --font-size-h3: clamp(1.5rem, 2.5vw, 2rem);
+  --font-size-body: clamp(1rem, 1.5vw, 1.25rem);
+  --font-size-small: clamp(0.875rem, 1.25vw, 1rem);
+  
+  // Font Weights
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  // Spacing
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  
+  // Layout
+  --content-max-width: 1100px;
+  --slide-padding: var(--space-xl);
+  --border-radius: 8px;
+  --border-radius-large: 12px;
+  
+  // Shadows
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  // Background and Base Styles
+  background: var(--background-primary);
+  font-family: var(--font-family-primary);
+  color: var(--text-primary);
+  
+  // Headings
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-color);
+    line-height: 1.2;
+    margin-bottom: var(--space-lg);
+    
+    &::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      margin-top: var(--space-sm);
+      border-radius: 2px;
+    }
+  }
+  
+  h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+  }
+  
+  h2 {
+    font-size: var(--font-size-h2);
+  }
+  
+  h3 {
+    font-size: var(--font-size-h3);
+  }
+  
+  // Body text
+  p, li {
+    font-size: var(--font-size-body);
+    line-height: 1.6;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+  }
+  
+  // Links
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    
+    &:hover, &:focus {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+  }
+  
+  // Lists
+  ul, ol {
+    margin-left: var(--space-lg);
+    
+    li {
+      margin-bottom: var(--space-sm);
+      
+      &::marker {
+        color: var(--secondary-color);
+      }
+    }
+  }
+  
+  ul li::before {
+    content: '▸';
+    color: var(--secondary-color);
+    font-weight: var(--font-weight-bold);
+    position: absolute;
+    margin-left: -1.2em;
+  }
+  
+  // Slides
+  .slides section {
+    background: var(--background-primary);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    padding: var(--slide-padding);
+    
+    &.present {
+      transform: scale(1);
+    }
+  }
+  
+  // Title slide
+  .title-slide {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    h1 {
+      color: white;
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-lg);
+      
+      &::after {
+        background: rgba(255, 255, 255, 0.3);
+        margin: var(--space-md) auto 0;
+      }
+    }
+    
+    .presentation-subtitle {
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-normal);
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .title-meta {
+      font-size: var(--font-size-body);
+      color: rgba(255, 255, 255, 0.8);
+      
+      .author, .date {
+        margin-bottom: var(--space-sm);
+      }
+    }
+  }
+  
+  // Two-column layouts
+  .columns {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: flex-start;
+    
+    .column {
+      flex: 1;
+      background: var(--background-secondary);
+      padding: var(--space-lg);
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--secondary-color);
+      
+      h3 {
+        color: var(--primary-color);
+        margin-bottom: var(--space-md);
+        
+        &::after {
+          width: 40px;
+          height: 2px;
+        }
+      }
+    }
+  }
+  
+  // Code blocks
+  pre, code {
+    font-family: var(--font-family-mono);
+    background: var(--background-tertiary);
+    border-radius: var(--border-radius);
+  }
+  
+  pre {
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    border-left: 4px solid var(--accent-color);
+    overflow-x: auto;
+    
+    code {
+      background: transparent;
+      padding: 0;
+    }
+  }
+  
+  code {
+    padding: 0.25em 0.5em;
+    font-size: 0.9em;
+    color: var(--primary-color);
+  }
+  
+  // Charts and data visualization
+  .chart-container {
+    background: var(--background-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    margin: var(--space-lg) 0;
+  }
+  
+  // Blockquotes
+  blockquote {
+    background: var(--background-secondary);
+    border-left: 4px solid var(--accent-color);
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    font-style: italic;
+    font-size: var(--font-size-body);
+    
+    &::before {
+      content: '"';
+      font-size: 3rem;
+      color: var(--accent-color);
+      position: absolute;
+      margin-top: -0.5rem;
+      margin-left: -0.5rem;
+    }
+    
+    cite {
+      display: block;
+      text-align: right;
+      margin-top: var(--space-md);
+      font-style: normal;
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+      
+      &::before {
+        content: '— ';
+      }
+    }
+  }
+  
+  // Fragment animations
+  .fragment {
+    &.fade-in {
+      opacity: 0;
+      
+      &.visible {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    }
+    
+    &.slide-up {
+      transform: translateY(20px);
+      opacity: 0;
+      
+      &.visible {
+        transform: translateY(0);
+        opacity: 1;
+        transition: all 0.4s ease;
+      }
+    }
+    
+    &.highlight-blue {
+      &.visible {
+        background: rgba(59, 130, 246, 0.1);
+        padding: 0.25em 0.5em;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+    }
+  }
+  
+  // Progress bar
+  .progress {
+    color: var(--primary-color);
+  }
+  
+  // Controls
+  .controls {
+    color: var(--primary-color);
+    
+    button {
+      background: var(--background-primary);
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: var(--font-weight-medium);
+      transition: all 0.2s ease;
+      
+      &:hover, &:focus {
+        background: var(--primary-color);
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+  
+  // Speaker notes
+  .speaker-notes {
+    background: var(--background-tertiary);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin-top: var(--space-lg);
+    border-left: 4px solid var(--warning-color);
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+  }
+  
+  // Media queries for responsiveness
+  @media (max-width: 768px) {
+    --slide-padding: var(--space-md);
+    
+    .columns {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    
+    h1::after, h2::after, h3::after {
+      width: 40px;
+    }
+  }
+}

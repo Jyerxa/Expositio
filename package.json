@@ -1,7 +1,7 @@
 {
-  "name": "@presentation-template/starship",
-  "version": "2.0.0",
-  "description": "Professional presentation template system with modular architecture and enterprise-grade quality",
+  "name": "expositio",
+  "version": "3.0.0",
+  "description": "Enterprise-grade presentation template system with 4 professional themes, comprehensive TypeScript configuration, and production-ready components",
   "type": "module",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
@@ -51,7 +51,15 @@
     "professional",
     "enterprise",
     "modular",
-    "responsive"
+    "responsive",
+    "themes",
+    "corporate",
+    "academic",
+    "minimal",
+    "starship",
+    "hot-swappable",
+    "event-driven",
+    "performance-optimized"
   ],
   "author": {
     "name": "Professional Presentation Template",

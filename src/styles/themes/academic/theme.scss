@@ -1,0 +1,552 @@
+// Academic Theme - Educational and Research Presentations
+// Traditional, scholarly, and professional design for academic environments
+
+.reveal.theme-academic {
+  // Color Palette - Traditional Academic Colors
+  --primary-color: #1e3a8a; // Deep navy blue
+  --secondary-color: #7c2d12; // Rich burgundy
+  --accent-color: #b45309; // Warm gold
+  --success-color: #166534; // Forest green
+  --warning-color: #92400e; // Amber brown
+  --error-color: #991b1b; // Deep red
+  
+  // Neutral Colors
+  --background-primary: #fefefe; // Off-white
+  --background-secondary: #f8f9fa; // Light warm gray
+  --background-tertiary: #e9ecef; // Medium warm gray
+  --text-primary: #212529; // Near black
+  --text-secondary: #495057; // Dark gray
+  --text-muted: #6c757d; // Medium gray
+  
+  // Academic Typography - Serif for headings, Sans for body
+  --font-family-primary: 'Charter', 'Bitstream Charter', 'Sitka Text', Cambria, serif;
+  --font-family-heading: 'Crimson Pro', 'Crimson Text', Georgia, 'Times New Roman', serif;
+  --font-family-mono: 'JetBrains Mono', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  
+  // Typography Scale - Larger for readability
+  --font-size-h1: clamp(2.75rem, 4.5vw, 4rem);
+  --font-size-h2: clamp(2.25rem, 3.75vw, 3rem);
+  --font-size-h3: clamp(1.75rem, 2.75vw, 2.25rem);
+  --font-size-body: clamp(1.125rem, 1.75vw, 1.375rem);
+  --font-size-small: clamp(1rem, 1.5vw, 1.125rem);
+  
+  // Font Weights
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  // Spacing - More generous for academic content
+  --space-xs: 0.625rem;
+  --space-sm: 0.875rem;
+  --space-md: 1.25rem;
+  --space-lg: 1.75rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 3.5rem;
+  
+  // Layout
+  --content-max-width: 1200px;
+  --slide-padding: var(--space-xl);
+  --border-radius: 4px;
+  --border-radius-large: 8px;
+  
+  // Shadows - Subtle for academic aesthetic
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+  
+  // Background and Base Styles
+  background: var(--background-primary);
+  font-family: var(--font-family-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  
+  // Headings - Academic styling with serif fonts
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-heading);
+    font-weight: var(--font-weight-semibold);
+    color: var(--primary-color);
+    line-height: 1.3;
+    margin-bottom: var(--space-lg);
+    text-align: left;
+    
+    // Academic underline decoration
+    &::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 2px;
+      background: var(--secondary-color);
+      margin-top: var(--space-sm);
+      border-radius: 1px;
+    }
+  }
+  
+  h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    text-align: center;
+    
+    &::after {
+      margin: var(--space-md) auto 0;
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    }
+  }
+  
+  h2 {
+    font-size: var(--font-size-h2);
+    border-bottom: 1px solid var(--background-tertiary);
+    padding-bottom: var(--space-sm);
+    
+    &::after {
+      display: none;
+    }
+  }
+  
+  h3 {
+    font-size: var(--font-size-h3);
+    color: var(--secondary-color);
+  }
+  
+  // Body text - Optimized for reading
+  p, li {
+    font-size: var(--font-size-body);
+    line-height: 1.7;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    text-align: justify;
+    hyphens: auto;
+  }
+  
+  // Academic emphasis
+  strong, b {
+    font-weight: var(--font-weight-bold);
+    color: var(--secondary-color);
+  }
+  
+  em, i {
+    font-style: italic;
+    color: var(--primary-color);
+  }
+  
+  // Links - Academic style
+  a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    font-weight: var(--font-weight-medium);
+    transition: all 0.2s ease;
+    
+    &:hover, &:focus {
+      color: var(--secondary-color);
+      text-decoration-thickness: 2px;
+    }
+  }
+  
+  // Academic lists
+  ul, ol {
+    margin-left: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    
+    li {
+      margin-bottom: var(--space-sm);
+      padding-left: var(--space-xs);
+      
+      &::marker {
+        color: var(--secondary-color);
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+  
+  ul li {
+    list-style-type: none;
+    position: relative;
+    
+    &::before {
+      content: '•';
+      color: var(--secondary-color);
+      font-weight: var(--font-weight-bold);
+      font-size: 1.2em;
+      position: absolute;
+      left: -1.2em;
+      top: -0.1em;
+    }
+  }
+  
+  ol {
+    counter-reset: academic-counter;
+    
+    li {
+      counter-increment: academic-counter;
+      list-style: none;
+      position: relative;
+      
+      &::before {
+        content: counter(academic-counter) '.';
+        color: var(--secondary-color);
+        font-weight: var(--font-weight-bold);
+        position: absolute;
+        left: -2em;
+        width: 1.5em;
+        text-align: right;
+      }
+    }
+  }
+  
+  // Slides - Clean academic styling
+  .slides section {
+    background: var(--background-primary);
+    padding: var(--slide-padding);
+    text-align: left;
+    
+    &.present {
+      transform: scale(1);
+    }
+  }
+  
+  // Title slide - Academic ceremony style
+  .title-slide {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--space-2xl);
+    
+    h1 {
+      color: white;
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--space-xl);
+      line-height: 1.2;
+      
+      &::after {
+        background: rgba(255, 255, 255, 0.4);
+        width: 150px;
+        height: 3px;
+        margin: var(--space-lg) auto 0;
+      }
+    }
+    
+    .presentation-subtitle {
+      font-size: var(--font-size-h3);
+      font-weight: var(--font-weight-normal);
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .title-meta {
+      font-size: var(--font-size-body);
+      color: rgba(255, 255, 255, 0.85);
+      
+      .author {
+        font-weight: var(--font-weight-medium);
+        margin-bottom: var(--space-sm);
+      }
+      
+      .date {
+        font-style: italic;
+        margin-bottom: var(--space-sm);
+      }
+    }
+  }
+  
+  // Two-column layouts - Academic paper style
+  .columns {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: flex-start;
+    margin: var(--space-lg) 0;
+    
+    .column {
+      flex: 1;
+      background: var(--background-secondary);
+      padding: var(--space-lg);
+      border-radius: var(--border-radius);
+      border-top: 3px solid var(--accent-color);
+      box-shadow: var(--shadow-sm);
+      
+      h3 {
+        color: var(--primary-color);
+        margin-bottom: var(--space-md);
+        text-align: center;
+        
+        &::after {
+          width: 60px;
+          margin: var(--space-sm) auto 0;
+          background: var(--accent-color);
+        }
+      }
+    }
+  }
+  
+  // Code blocks - Academic style
+  pre, code {
+    font-family: var(--font-family-mono);
+    background: var(--background-tertiary);
+    border-radius: var(--border-radius);
+  }
+  
+  pre {
+    padding: var(--space-lg);
+    margin: var(--space-lg) 0;
+    border: 1px solid #d1d5db;
+    border-left: 4px solid var(--accent-color);
+    overflow-x: auto;
+    box-shadow: var(--shadow-sm);
+    
+    code {
+      background: transparent;
+      padding: 0;
+      border: none;
+    }
+  }
+  
+  code {
+    padding: 0.25em 0.5em;
+    font-size: 0.9em;
+    color: var(--primary-color);
+    border: 1px solid #e5e7eb;
+  }
+  
+  // Charts and figures - Academic styling
+  .chart-container {
+    background: var(--background-primary);
+    border: 2px solid var(--background-tertiary);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin: var(--space-xl) 0;
+    box-shadow: var(--shadow-sm);
+    
+    &::before {
+      content: 'Figure';
+      display: block;
+      font-weight: var(--font-weight-bold);
+      color: var(--secondary-color);
+      font-size: var(--font-size-small);
+      margin-bottom: var(--space-sm);
+    }
+  }
+  
+  // Academic blockquotes - Citation style
+  blockquote {
+    background: var(--background-secondary);
+    border-left: 4px solid var(--secondary-color);
+    padding: var(--space-lg) var(--space-xl);
+    margin: var(--space-xl) 0;
+    font-style: italic;
+    font-size: var(--font-size-body);
+    position: relative;
+    
+    &::before {
+      content: '"';
+      font-family: var(--font-family-heading);
+      font-size: 4rem;
+      color: var(--secondary-color);
+      position: absolute;
+      left: var(--space-md);
+      top: 0;
+      line-height: 1;
+      opacity: 0.3;
+    }
+    
+    p {
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-lg);
+    }
+    
+    cite {
+      display: block;
+      text-align: right;
+      margin-top: var(--space-lg);
+      font-style: normal;
+      font-weight: var(--font-weight-medium);
+      color: var(--text-secondary);
+      font-size: var(--font-size-small);
+      
+      &::before {
+        content: '— ';
+        font-weight: var(--font-weight-bold);
+      }
+    }
+  }
+  
+  // Academic tables
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-xl) 0;
+    font-size: var(--font-size-small);
+    
+    th, td {
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      border-bottom: 1px solid var(--background-tertiary);
+    }
+    
+    th {
+      background: var(--background-secondary);
+      font-weight: var(--font-weight-bold);
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--secondary-color);
+    }
+    
+    tr:nth-child(even) {
+      background: var(--background-secondary);
+    }
+  }
+  
+  // Fragment animations - Subtle academic style
+  .fragment {
+    &.fade-in {
+      opacity: 0;
+      
+      &.visible {
+        opacity: 1;
+        transition: opacity 0.4s ease;
+      }
+    }
+    
+    &.slide-up {
+      transform: translateY(30px);
+      opacity: 0;
+      
+      &.visible {
+        transform: translateY(0);
+        opacity: 1;
+        transition: all 0.5s ease;
+      }
+    }
+    
+    &.highlight-academic {
+      &.visible {
+        background: rgba(180, 83, 9, 0.1);
+        padding: 0.25em 0.5em;
+        border-radius: var(--border-radius);
+        border-left: 3px solid var(--accent-color);
+        transition: all 0.4s ease;
+      }
+    }
+  }
+  
+  // Progress bar
+  .progress {
+    color: var(--secondary-color);
+  }
+  
+  // Controls - Academic style
+  .controls {
+    color: var(--primary-color);
+    
+    button {
+      background: var(--background-primary);
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      border-radius: var(--border-radius);
+      padding: var(--space-sm) var(--space-md);
+      font-weight: var(--font-weight-medium);
+      font-family: var(--font-family-primary);
+      transition: all 0.2s ease;
+      
+      &:hover, &:focus {
+        background: var(--primary-color);
+        color: white;
+        box-shadow: var(--shadow-md);
+      }
+    }
+  }
+  
+  // Speaker notes - Academic annotations
+  .speaker-notes {
+    background: var(--background-tertiary);
+    border-radius: var(--border-radius);
+    padding: var(--space-lg);
+    margin-top: var(--space-xl);
+    border-left: 4px solid var(--warning-color);
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+    font-style: italic;
+    
+    &::before {
+      content: 'Notes:';
+      display: block;
+      font-weight: var(--font-weight-bold);
+      color: var(--warning-color);
+      margin-bottom: var(--space-sm);
+      font-style: normal;
+    }
+  }
+  
+  // Citations and references
+  .citation {
+    font-size: var(--font-size-small);
+    color: var(--text-secondary);
+    font-style: italic;
+    
+    &::before {
+      content: '[';
+    }
+    
+    &::after {
+      content: ']';
+    }
+  }
+  
+  .references {
+    font-size: var(--font-size-small);
+    line-height: 1.6;
+    
+    h3 {
+      font-size: var(--font-size-h3);
+      border-bottom: 2px solid var(--secondary-color);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .reference-item {
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-lg);
+      text-indent: calc(-1 * var(--space-lg));
+    }
+  }
+  
+  // Media queries for responsiveness
+  @media (max-width: 768px) {
+    --slide-padding: var(--space-lg);
+    --font-size-body: clamp(1rem, 1.5vw, 1.125rem);
+    
+    .columns {
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+    
+    blockquote {
+      margin: var(--space-lg) 0;
+      padding: var(--space-md) var(--space-lg);
+      
+      &::before {
+        font-size: 3rem;
+        left: var(--space-sm);
+      }
+      
+      p {
+        padding-left: var(--space-md);
+      }
+    }
+    
+    table {
+      font-size: 0.9rem;
+      
+      th, td {
+        padding: var(--space-xs) var(--space-sm);
+      }
+    }
+  }
+}
