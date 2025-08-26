@@ -42,7 +42,7 @@
 ## 🚦 Quick Start
 
 ### Prerequisites
-- **Node.js** 16+ 
+- **Node.js** 16+
 - **npm** 8+
 
 ### Development Setup
