@@ -22,6 +22,7 @@
     "dev": "vite serve",
     "build": "vite build && tsc --emitDeclarationOnly",
     "preview": "vite preview",
+    "serve": "vite preview --port 8080 --strictPort",
     "type-check": "tsc --noEmit",
     "lint": "npm run lint:ts && npm run lint:styles",
     "lint:ts": "eslint src/**/*.{ts,js} --fix",

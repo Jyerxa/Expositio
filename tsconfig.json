@@ -51,24 +51,8 @@
       ],
       "@scripts/*": [
         "src/scripts/*"
-      ],
-      "@templates/*": [
-        "src/templates/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@docs/*": [
-        "docs/*"
-      ],
-      "@examples/*": [
-        "examples/*"
       ]
-    },
-    // Advanced Options
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "useDefineForClassFields": true
+    }
   },
   // Include/Exclude
   "include": [

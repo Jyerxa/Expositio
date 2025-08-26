@@ -163,25 +163,8 @@ export class ThemeManager {
     this.availableThemes.set(variantTheme.name, variantTheme);
   }
 
-  public preloadThemes(themeNames: string[]): Promise<void[]> {
-    const loadPromises = themeNames.map(async (themeName) => {
-      if (!this.availableThemes.has(themeName)) {
-        throw new ThemeError(`Cannot preload unknown theme: ${themeName}`);
-      }
-
-      try {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'style';
-        link.href = `${this.themeBasePath}${themeName}/theme.css`;
-        document.head.appendChild(link);
-      } catch (error) {
-        console.warn(`Failed to preload theme ${themeName}:`, error);
-      }
-    });
-
-    return Promise.all(loadPromises);
-  }
+  // Preloading external theme stylesheets is not required because
+  // all themes are bundled into the main CSS output.
 
   public destroy(): void {
     if (this.themeStyleElement) {

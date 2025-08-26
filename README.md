@@ -75,6 +75,37 @@ npm run preview
 
 # Serve static files
 npm run serve
+
+## Initialization Modes
+
+- UMD auto-init: the library will automatically initialize when loaded. To opt out and initialize manually, set the flag before including the script:
+
+```html
+<script>window.EXPOSITIO_AUTO_INIT = false;</script>
+<script src="./dist/main.umd.js"></script>
+<script>
+  const presentation = new window.PresentationTemplate.default(window.EXPOSITIO_CONFIG || {});
+  presentation.initialize();
+  window.presentationTemplate = presentation;
+  </script>
+```
+
+## Custom Events
+
+The library emits custom events on `window` with the `presentation:` prefix.
+
+- `presentation:ready` – `{ version, config, metrics }`
+- `presentation:slide-changed` – `{ previousSlide, currentSlide, indexh, indexv }`
+- `presentation:fragment-shown` – `{ fragment }`
+- `presentation:fragment-hidden` – `{ fragment }`
+
+Example:
+
+```js
+window.addEventListener('presentation:ready', (e) => {
+  console.log('Ready', e.detail);
+});
+```
 ```
 
 ## 🛠️ Development Scripts
@@ -356,6 +387,8 @@ npm run test:visual
 # Run full test suite
 npm run test
 ```
+
+Playwright uses an embedded web server during tests. Ensure `npm run serve` is available (Vite preview on port 8080) or adjust `playwright.config.js` accordingly.
 
 ### Custom Test Configuration
 ```javascript
