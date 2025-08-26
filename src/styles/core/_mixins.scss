@@ -147,8 +147,6 @@
 }
 
 // Hover and focus states
-@mixin hover-focus {
-
   &:hover,
   &:focus {
     @content;
